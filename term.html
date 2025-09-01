@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>特定商取引法に基づく表記 | civicAI</title> <!-- ← サイト/ブランド名に変更 -->
+  <meta name="description" content="特定商取引法に基づく表記（通信販売法に基づく表示）" />
+  <style>
+    :root { --fg:#111; --muted:#555; --bg:#fff; --card:#f7f7f8; --max:920px; }
+    html,body { margin:0; padding:0; background:var(--bg); color:var(--fg); font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic UI", "Yu Gothic", "Meiryo", sans-serif; line-height:1.7; }
+    header { padding:48px 20px 16px; border-bottom:1px solid #eee; }
+    header .brand { color:var(--muted); margin-top:6px; font-size:14px; }
+    main { max-width:var(--max); margin:0 auto; padding:24px 20px 56px; }
+    .card { background:var(--card); border-radius:12px; padding:20px; }
+    h1 { font-size:28px; margin:0; }
+    h2 { font-size:18px; margin:24px 0 12px; }
+    dl { display:grid; grid-template-columns: 220px 1fr; gap:.75rem 1.2rem; margin:0; }
+    dt { font-weight:700; }
+    dd { margin:0; }
+    .note { color:var(--muted); font-size:13px; margin-top:12px; }
+    footer { max-width:var(--max); margin:0 auto; padding:16px 20px 32px; color:var(--muted); font-size:13px; }
+    a { color:#0645ad; text-decoration:underline; }
+    @media (max-width:640px) {
+      dl { grid-template-columns: 1fr; }
+      dt { margin-top:.75rem; }
+    }
+  </style>
+
+  <!-- 構造化データ（任意）：公開URLや名称・連絡先を実値に変更してください -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "civicAI",                      /* ← 屋号/ブランド名 */
+    "url": "https://yourname.github.io/yourrepo/", /* ← 公開URL */
+    "email": "support@example.com",
+    "address": {
+      "@type": "PostalAddress",
+      "postalCode": "000-0000",
+      "addressRegion": "東京都",
+      "addressLocality": "〇〇区",
+      "streetAddress": "〇〇 1-2-3 〇〇ビル 4F"
+    }
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>特定商取引法に基づく表記</h1>
+    <p class="brand">civicAI（屋号／ブランド名）</p> <!-- ← 任意。法人でない場合は屋号やブランド名 -->
+  </header>
+
+  <main>
+    <section class="card" aria-labelledby="legal">
+      <h2 id="legal">表記</h2>
+      <dl>
+        <!-- 販売事業者名（屋号） -->
+        <dt>販売事業者名</dt>
+        <dd>civicAI（運営者：山田太郎）<!-- ← 屋号＋個人名。法人なら法人名のみ --></dd>
+
+        <!-- 代表者 -->
+        <dt>代表者</dt>
+        <dd>山田太郎</dd>
+
+        <!-- 所在地 -->
+        <dt>所在地</dt>
+        <dd>〒000-0000 東京都〇〇区〇〇 1-2-3 〇〇ビル 4F
+          <!-- ※住所の公開要件は事業形態や提供形態により異なります。ガイドラインに沿って実情報に差し替え -->
+        </dd>
+
+        <!-- お問い合わせ先（URL付き） -->
+        <dt>お問い合わせ先</dt>
+        <dd>
+          フォーム：
+          <a href="https://example.com/contact" target="_blank" rel="noopener">https://example.com/contact</a><br>
+          メール：<a href="mailto:support@example.com">support@example.com</a><br>
+          受付時間：平日 10:00–18:00（日本時間）
+        </dd>
+
+        <!-- 販売価格 -->
+        <dt>販売価格</dt>
+        <dd>各商品・サービスの購入画面に税込価格で表示します。</dd>
+
+        <!-- 支払い方法 -->
+        <dt>支払い方法</dt>
+        <dd>クレジットカード（Visa / Mastercard / Amex 等）、Apple ID / Google Play 決済、その他当社が定める方法。</dd>
+
+        <!-- 提供期間 -->
+        <dt>提供期間</dt>
+        <dd>購入手続完了後、直ちにご利用いただけます（サブスクリプションは契約期間中）。</dd>
+
+        <!-- 引き渡し時期 -->
+        <dt>引き渡し時期</dt>
+        <dd>デジタルコンテンツ：決済完了後すぐにダウンロードまたはアカウントに反映されます。物販がある場合は各商品ページに記載します。</dd>
+
+        <!-- 販売価格以外に発生する料金 -->
+        <dt>販売価格以外に発生する料金</dt>
+        <dd>インターネット接続に伴う通信料、振込手数料、送料（物品発送がある場合のみ）。</dd>
+
+        <!-- 返品・キャンセルについて -->
+        <dt>返品・キャンセルについて</dt>
+        <dd>
+          デジタルコンテンツ/サービスの性質上、購入後の返品・返金はお受けしておりません。提供に瑕疵がある場合は個別に対応いたします。<br>
+          サブスクリプションの解約は次回更新日の24時間前までに手続きしてください。法令により取消しが認められる場合はこの限りではありません。
+        </dd>
+      </dl>
+
+      <p class="note">※本テンプレートは一般的な記載例です。実際の事業内容・決済手段・提供形態に合わせて必ず修正してください。</p>
+    </section>
+  </main>
+
+  <footer>
+    最終更新日：<time id="updated" datetime="2025-09-01">2025-09-01</time>
+  </footer>
+
+  <!-- URLに ?autoDate=1 を付けて開くと、表示上の最終更新日を現在日に差し替えます（静的運用向けの簡易機能） -->
+  <script>
+    (function(){
+      const el = document.getElementById('updated');
+      if (!el) return;
+      if (location.search.includes('autoDate=1')) {
+        const d = new Date();
+        const y = d.getFullYear();
+        const m = String(d.getMonth()+1).padStart(2,'0');
+        const day = String(d.getDate()).padStart(2,'0');
+        el.textContent = `${y}-${m}-${day}`;
+        el.setAttribute('datetime', `${y}-${m}-${day}`);
+      }
+    })();
+  </script>
+</body>
+</html>

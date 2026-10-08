@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>使い方 | パスワード管理帳 SimplePS</title>
-  <meta name="description" content="パスワード管理帳 SimplePS の使い方。はじめての設定から、パスワード・ToDo・メモの使い方まで、実際の画面で説明します。" />
+  <title>使い方 | LockNote</title>
+  <meta name="description" content="LockNote の使い方。はじめての設定から、パスワード・ToDo・メモの使い方まで、実際の画面で説明します。" />
   <style>
     /* ============================================================
        リセット・基本
@@ -357,7 +357,30 @@
       .shot.single { width: 72%; }
       .card-grid { grid-template-columns: 1fr; }
     }
+    /* ---- 言語切り替え・翻訳の注記（多言語対応） ---- */
+    .lang-bar { border-bottom: 1px solid rgba(255,255,255,.18); }
+    .lang-inner {
+      max-width: 960px; margin: 0 auto; padding: 5px 0;
+      display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 2px;
+      font-size: 13px; line-height: 1.4;
+    }
+    .lang-inner .globe { margin-right: 4px; }
+    .lang-inner a { color: rgba(255,255,255,.88); text-decoration: none; padding: 3px 9px; border-radius: 999px; }
+    .lang-inner a:hover { background: rgba(255,255,255,.2); color: #fff; }
+    .lang-inner a[aria-current="page"] { background: #fff; color: #3949AB; font-weight: 700; }
+    .shot-note { font-size: 15px; color: #555; background: #fff; border-left: 5px solid #5C6BC0; border-radius: 0 8px 8px 0; padding: 10px 14px; margin: -16px 0 32px; }
+    .translation-note { background: #FFF8E1; border: 1px solid #FFE082; border-radius: 10px; padding: 12px 16px; margin-bottom: 20px; font-size: 15px; }
+    html[lang="ko"] body { font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif; }
+    html[lang="en"] body, html[lang="es"] body, html[lang="fr"] body, html[lang="de"] body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    @media (max-width: 600px) { .lang-inner { justify-content: flex-start; } }
   </style>
+  <link rel="alternate" hreflang="ja" href="https://civicaiofficial.github.io/simpleps.io/simpleps-guide.html" />
+  <link rel="alternate" hreflang="en" href="https://civicaiofficial.github.io/simpleps.io/en/simpleps-guide.html" />
+  <link rel="alternate" hreflang="ko" href="https://civicaiofficial.github.io/simpleps.io/ko/simpleps-guide.html" />
+  <link rel="alternate" hreflang="es" href="https://civicaiofficial.github.io/simpleps.io/es/simpleps-guide.html" />
+  <link rel="alternate" hreflang="fr" href="https://civicaiofficial.github.io/simpleps.io/fr/simpleps-guide.html" />
+  <link rel="alternate" hreflang="de" href="https://civicaiofficial.github.io/simpleps.io/de/simpleps-guide.html" />
+  <link rel="alternate" hreflang="x-default" href="https://civicaiofficial.github.io/simpleps.io/simpleps-guide.html" />
 </head>
 <body>
 
@@ -365,10 +388,13 @@
      ヘッダー
 ============================================================ -->
 <header>
+  <div class="lang-bar">
+    <div class="lang-inner"><span class="globe" aria-hidden="true">🌐</span><a href="simpleps-guide.html" hreflang="ja" lang="ja" aria-current="page">日本語</a> <a href="en/simpleps-guide.html" hreflang="en" lang="en">English</a> <a href="ko/simpleps-guide.html" hreflang="ko" lang="ko">한국어</a> <a href="es/simpleps-guide.html" hreflang="es" lang="es">Español</a> <a href="fr/simpleps-guide.html" hreflang="fr" lang="fr">Français</a> <a href="de/simpleps-guide.html" hreflang="de" lang="de">Deutsch</a></div>
+  </div>
   <div class="header-inner">
     <div class="site-title">
       <span class="icon">🔐</span>
-      パスワード管理帳 SimplePS
+      LockNote
     </div>
     <nav>
       <a href="index.html">ホーム</a>
@@ -972,9 +998,9 @@
       </figure>
     </div>
 
-    <div class="warn-box">
-      <strong>⚠️ パスワードはメモに書かないでください</strong><br>
-      メモとToDoはスマホの中に保存されますが、パスワードのような特別な暗号化はしていません。パスワードや暗証番号は「パスワード」の画面に登録してください。
+    <div class="point-box">
+      <strong>🔐 メモとToDoも暗号化して保存されます</strong><br>
+      書いた内容は、パスワードと同じようにスマホの安全な保管場所に暗号化して保存されます。ただし、パスワードは「パスワード」の画面に登録すると、コピーや自動作成などの便利な機能が使えるのでおすすめです。
     </div>
   </section>
 
@@ -1010,8 +1036,8 @@
       </div>
       <div class="card">
         <div class="card-icon">🔐</div>
-        <h3>パスワードは暗号化して保存</h3>
-        <p>パスワードは、スマホの安全な保管場所に暗号化して保存します。</p>
+        <h3>データは暗号化して保存</h3>
+        <p>パスワード・ToDo・メモは、スマホの安全な保管場所に暗号化して保存します。</p>
       </div>
       <div class="card">
         <div class="card-icon">📋</div>
@@ -1180,7 +1206,7 @@
     <a href="simpleps-privacypolicy.html">プライバシーポリシー</a>
     <a href="simpleps-legal.html">特商法表記</a>
   </nav>
-  <p>&copy; 2026 パスワード管理帳 SimplePS（CivicAI）</p>
+  <p>&copy; 2026 LockNote（CivicAI）</p>
 </footer>
 
 </body>

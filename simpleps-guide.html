@@ -544,8 +544,8 @@
     <p style="margin-top:18px;">画面右上の <strong>⚙️ 歯車</strong> は設定、<strong>🔒 カギ</strong> はすぐにロックするボタンです。</p>
 
     <div class="point-box">
-      <strong>📢 広告について</strong><br>
-      無料でお使いの場合、画面の下に広告が表示されます。<a href="#sec-premium">プレミアムプラン</a>では広告が消えます。
+      <strong>👀 「閲覧のみ」のとき</strong><br>
+      <a href="#sec-premium">プレミアムプラン</a>の無料お試しを始める前や解約したあとは「閲覧のみ」になり、データを見る・コピーすることはできますが、追加や編集はできません。なお、このアプリに広告は表示されません。
     </div>
   </section>
 
@@ -1048,11 +1048,11 @@
 
     <div class="point-box" style="margin-top: 20px;">
       <strong>🛡️ データはあなたのスマホの中だけ</strong><br>
-      登録したパスワード・ToDo・メモを、私たちのサーバーやクラウドへ送ることはありません。なお、無料でお使いの場合は広告を表示するために、広告の会社と通信します（くわしくは<a href="simpleps-privacypolicy.html">プライバシーポリシー</a>をご覧ください）。
+      登録したパスワード・ToDo・メモを、私たちのサーバーやクラウドへ送ることはありません。広告も表示しないため、広告の会社と通信することもありません（くわしくは<a href="simpleps-privacypolicy.html">プライバシーポリシー</a>をご覧ください）。
     </div>
     <div class="warn-box">
       <strong>⚠️ 機種変更の前に</strong><br>
-      データはスマホの中にだけあるため、スマホをなくしたり機種変更したりすると、データも一緒になくなります。プレミアムプランの<a href="#sec-csv">CSVで保存</a>を使って、控えを取っておくと安心です。
+      データはスマホの中にだけあるため、スマホをなくしたり機種変更したりすると、データも一緒になくなります。<a href="#sec-csv">CSVで保存</a>を使って、控えを取っておくと安心です。
     </div>
   </section>
 
@@ -1073,8 +1073,8 @@
           <tr><th>項目</th><th>できること</th></tr>
         </thead>
         <tbody>
-          <tr><td>⭐ プレミアムプラン</td><td>プレミアムプランの申し込み・確認</td></tr>
-          <tr><td>⇅ CSV管理</td><td>パスワードをファイルに保存・ファイルから復元（プレミアムプラン）</td></tr>
+          <tr><td>⭐ プレミアムプラン</td><td>プレミアムプランの申し込み（はじめの1か月は無料）・確認</td></tr>
+          <tr><td>⇅ CSV管理</td><td>パスワードをファイルに保存・ファイルから復元（復元はプレミアムプラン）</td></tr>
           <tr><td>🔢 PINコードを変更する</td><td>今のPINコードを入力してから、新しいPINコードを2回入力します</td></tr>
           <tr><td>🎨 テーマ設定</td><td>画面の明るさを「ライトモード」「ダークモード」「システム設定に従う」からえらびます</td></tr>
           <tr><td>🌐 言語</td><td>日本語・English・한국어・Español・Français・Deutsch から切り替えます</td></tr>
@@ -1106,7 +1106,7 @@
   <section class="section" id="sec-csv">
     <div class="section-header">
       <div class="num">13</div>
-      <h2>CSVで保存・復元 <span class="badge-premium">⭐ プレミアム</span></h2>
+      <h2>CSVで保存・復元 <span class="badge-premium">⭐ インポートはプレミアム</span></h2>
     </div>
 
     <p class="lead">登録したパスワードを、ファイル（CSV形式）に書き出して控えを取れます。機種変更のときは、新しいスマホでそのファイルを読みこむと元にもどせます。</p>
@@ -1126,7 +1126,7 @@
       <li>
         <div>
           <strong>元にもどすときは「インポート」をタップ</strong>
-          <p>書き出したファイルをえらび、読みこみ方（追加／上書き／全部入れかえ）をえらびます。</p>
+          <p>書き出したファイルをえらび、読みこみ方（追加／上書き／全部入れかえ）をえらびます。インポートには<a href="#sec-premium">プレミアムプラン</a>が必要です（エクスポートはいつでもできます）。</p>
         </div>
       </li>
     </ol>
@@ -1158,41 +1158,47 @@
     </div>
 
     <div class="price-box">
-      <div class="big">🎁 はじめの2週間は無料</div>
-      <div>その後 <strong>月額100円</strong>（自動更新）</div>
-      <div style="font-size: 15px; color: var(--text-sub); margin-top: 6px;">いつでも解約できます。解約しても、期間の終わりまではそのまま使えます。</div>
+      <div class="big">🎁 はじめの1か月は無料</div>
+      <div>その後 <strong>月額100円</strong>（税込・自動更新）</div>
+      <div style="font-size: 15px; color: var(--text-sub); margin-top: 6px;">いつでも解約できます。無料期間中に解約すれば、料金はかかりません。解約しても、期間の終わりまではそのまま使えます。</div>
     </div>
 
     <h3>プレミアムプランでできること</h3>
     <div class="card-grid">
       <div class="card">
-        <div class="card-icon">📤</div>
-        <h3>CSVエクスポート</h3>
-        <p>パスワードをファイルに書き出して控えを取れます。</p>
+        <div class="card-icon">✏️</div>
+        <h3>登録・編集</h3>
+        <p>パスワード・ToDo・メモを登録したり、直したり、消したりできます。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔐</div>
+        <h3>バックアップから復元</h3>
+        <p>暗号化バックアップのファイルから、データを元にもどせます。</p>
       </div>
       <div class="card">
         <div class="card-icon">📥</div>
         <h3>CSVインポート</h3>
         <p>書き出したファイルから、パスワードを元にもどせます。</p>
       </div>
-      <div class="card">
-        <div class="card-icon">🚫</div>
-        <h3>広告なし</h3>
-        <p>画面の下の広告が表示されなくなります。</p>
-      </div>
+    </div>
+
+    <div class="point-box" style="margin-top: 20px;">
+      <strong>👀 プランがないときは「閲覧のみ」</strong><br>
+      無料お試しを始める前や、解約して期間が終わったあとは「閲覧のみ」になります。保存したデータを見る・コピーする、暗号化バックアップを作る、CSVで書き出すことはできます。プランが終わっても、データが消えることはありません。
     </div>
 
     <h3>申し込み方</h3>
     <ol class="steps">
       <li><div><strong>設定の画面で「プレミアムプラン」をタップ</strong></div></li>
-      <li><div><strong>「2週間無料で始める」をタップ</strong><p>Google Play の画面が出るので、内容を確かめて手続きします。</p></div></li>
+      <li><div><strong>「1か月無料で始める」をタップ</strong><p>Google Play の画面が出るので、内容を確かめて手続きします。</p></div></li>
     </ol>
 
     <ul class="notes">
       <li>お支払いは Google Play アカウントに請求されます。</li>
-      <li>無料期間が終わる24時間前までに解約しないと、自動で月額100円が請求されます。</li>
+      <li>無料お試しは、初めてお申し込みの方が対象です。</li>
+      <li>無料期間の終わり、または更新日の24時間前までに解約しないと、自動で月額100円（税込）が請求されます。</li>
       <li>解約は Google Play アプリの「お支払いと定期購入」→「定期購入」から行えます。アプリを削除しただけでは解約されません。</li>
-      <li>機種変更したときは、プレミアムプランの画面の「購入を復元する」をタップしてください。</li>
+      <li>機種変更したときは、プレミアムプランの画面の「以前の購入を復元する」をタップしてください。</li>
     </ul>
   </section>
 

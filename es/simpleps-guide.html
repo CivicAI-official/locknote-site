@@ -545,8 +545,8 @@
     <p style="margin-top:18px;">Arriba a la derecha de la pantalla, el <strong>⚙️ engranaje</strong> abre la configuración y el <strong>🔒 candado</strong> es el botón para bloquear la aplicación al instante.</p>
 
     <div class="point-box">
-      <strong>📢 Sobre los anuncios</strong><br>
-      Si usa la aplicación gratis, se mostrarán anuncios en la parte de abajo de la pantalla. Con el <a href="#sec-premium">plan Premium</a>, los anuncios desaparecen.
+      <strong>👀 Cuando la aplicación está en «solo lectura»</strong><br>
+      Antes de empezar la prueba gratuita del <a href="#sec-premium">plan Premium</a>, o después de cancelar, la aplicación queda en «solo lectura»: puede ver y copiar sus datos, pero no añadir ni editar nada. La aplicación no muestra anuncios.
     </div>
   </section>
 
@@ -1049,11 +1049,11 @@
 
     <div class="point-box" style="margin-top: 20px;">
       <strong>🛡️ Sus datos están solo en su teléfono</strong><br>
-      Las contraseñas, tareas y notas que registra nunca se envían a nuestros servidores ni a la nube. Sin embargo, si usa la aplicación gratis, esta se comunica con las empresas de publicidad para mostrar anuncios (para más detalles, consulte la <a href="simpleps-privacypolicy.html">Política de privacidad</a>).
+      Las contraseñas, tareas y notas que registra nunca se envían a nuestros servidores ni a la nube. Como la aplicación no muestra anuncios, tampoco se comunica con empresas de publicidad (para más detalles, consulte la <a href="simpleps-privacypolicy.html">Política de privacidad</a>).
     </div>
     <div class="warn-box">
       <strong>⚠️ Antes de cambiar de teléfono</strong><br>
-      Como los datos están solo en el teléfono, si lo pierde o cambia de teléfono, los datos también se pierden. Para mayor tranquilidad, haga una copia con la función <a href="#sec-csv">Guardar con CSV</a> del plan Premium.
+      Como los datos están solo en el teléfono, si lo pierde o cambia de teléfono, los datos también se pierden. Para mayor tranquilidad, haga una copia con la función <a href="#sec-csv">Guardar con CSV</a>.
     </div>
   </section>
 
@@ -1074,8 +1074,8 @@
           <tr><th>Opción</th><th>Qué puede hacer</th></tr>
         </thead>
         <tbody>
-          <tr><td>⭐ Plan Premium</td><td>Contratar o consultar el plan Premium</td></tr>
-          <tr><td>⇅ Gestión CSV</td><td>Guardar las contraseñas en un archivo y restaurarlas desde un archivo (plan Premium)</td></tr>
+          <tr><td>⭐ Plan Premium</td><td>Contratar (el primer mes es gratis) o consultar el plan Premium</td></tr>
+          <tr><td>⇅ Gestión CSV</td><td>Guardar las contraseñas en un archivo y restaurarlas desde un archivo (para restaurar se necesita el plan Premium)</td></tr>
           <tr><td>🔢 Cambiar PIN</td><td>Escriba el código PIN actual y, después, el nuevo código PIN 2 veces</td></tr>
           <tr><td>🎨 Tema</td><td>Elija el brillo de la pantalla entre «Modo claro», «Modo oscuro» y «Seguir configuración del sistema»</td></tr>
           <tr><td>🌐 Idioma</td><td>Cambie entre japonés, English, 한국어, Español, Français y Deutsch</td></tr>
@@ -1107,7 +1107,7 @@
   <section class="section" id="sec-csv">
     <div class="section-header">
       <div class="num">13</div>
-      <h2>Guardar y restaurar con CSV <span class="badge-premium">⭐ Premium</span></h2>
+      <h2>Guardar y restaurar con CSV <span class="badge-premium">⭐ Importar: Premium</span></h2>
     </div>
 
     <p class="lead">Puede exportar las contraseñas registradas a un archivo (formato CSV) para tener una copia. Cuando cambie de teléfono, puede recuperarlas cargando ese archivo en el teléfono nuevo.</p>
@@ -1127,7 +1127,7 @@
       <li>
         <div>
           <strong>Para recuperar los datos, toque «Importar»</strong>
-          <p>Elija el archivo exportado y la forma de cargarlo (añadir / sobrescribir / reemplazar todo).</p>
+          <p>Elija el archivo exportado y la forma de cargarlo (añadir / sobrescribir / reemplazar todo). Para importar se necesita el <a href="#sec-premium">plan Premium</a> (exportar se puede siempre).</p>
         </div>
       </li>
     </ol>
@@ -1159,41 +1159,47 @@
     </div>
 
     <div class="price-box">
-      <div class="big">🎁 Las primeras 2 semanas son gratis</div>
-      <div>Después, <strong>100 yenes al mes</strong> (renovación automática)</div>
-      <div style="font-size: 15px; color: var(--text-sub); margin-top: 6px;">Puede cancelar en cualquier momento. Aunque cancele, podrá seguir usándolo hasta el final del período.</div>
+      <div class="big">🎁 El primer mes es gratis</div>
+      <div>Después, <strong>100 yenes al mes</strong> (impuestos incluidos, renovación automática)</div>
+      <div style="font-size: 15px; color: var(--text-sub); margin-top: 6px;">Puede cancelar en cualquier momento. Si cancela durante el período gratuito, no se le cobra nada. Aunque cancele, podrá seguir usándolo hasta el final del período.</div>
     </div>
 
     <h3>Qué incluye el plan Premium</h3>
     <div class="card-grid">
       <div class="card">
-        <div class="card-icon">📤</div>
-        <h3>Exportar CSV</h3>
-        <p>Puede exportar las contraseñas a un archivo para tener una copia.</p>
+        <div class="card-icon">✏️</div>
+        <h3>Añadir y editar</h3>
+        <p>Puede añadir, editar y eliminar contraseñas, tareas y notas.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔐</div>
+        <h3>Restaurar una copia</h3>
+        <p>Puede recuperar sus datos desde un archivo de copia de seguridad cifrada.</p>
       </div>
       <div class="card">
         <div class="card-icon">📥</div>
         <h3>Importar CSV</h3>
         <p>Puede recuperar las contraseñas desde el archivo exportado.</p>
       </div>
-      <div class="card">
-        <div class="card-icon">🚫</div>
-        <h3>Sin anuncios</h3>
-        <p>Ya no se muestran anuncios en la parte de abajo de la pantalla.</p>
-      </div>
+    </div>
+
+    <div class="point-box" style="margin-top: 20px;">
+      <strong>👀 Sin el plan, la aplicación queda en «solo lectura»</strong><br>
+      Antes de empezar la prueba gratuita, o cuando termina el período después de cancelar, la aplicación queda en «solo lectura». Puede seguir viendo y copiando los datos guardados, crear copias de seguridad cifradas y exportar a CSV. Sus datos nunca se borran al terminar el plan.
     </div>
 
     <h3>Cómo contratarlo</h3>
     <ol class="steps">
       <li><div><strong>En la pantalla de configuración, toque «Plan Premium»</strong></div></li>
-      <li><div><strong>Toque «Iniciar prueba gratuita de 2 semanas»</strong><p>Aparecerá la pantalla de Google Play. Revise el contenido y complete el trámite.</p></div></li>
+      <li><div><strong>Toque «Empezar 1 mes gratis»</strong><p>Aparecerá la pantalla de Google Play. Revise el contenido y complete el trámite.</p></div></li>
     </ol>
 
     <ul class="notes">
       <li>El pago se cobra a su cuenta de Google Play.</li>
-      <li>Si no cancela al menos 24 horas antes de que termine el período gratuito, se le cobrarán automáticamente 100 yenes al mes.</li>
+      <li>La prueba gratuita es solo para quienes se suscriben por primera vez.</li>
+      <li>Si no cancela al menos 24 horas antes de que termine el período gratuito o de la renovación, se le cobrarán automáticamente 100 yenes al mes (impuestos incluidos).</li>
       <li>Puede cancelar en la aplicación Google Play, en «Pagos y suscripciones» → «Suscripciones». Eliminar la aplicación no cancela la suscripción.</li>
-      <li>Si cambia de teléfono, toque «Restaurar compra» en la pantalla del plan Premium.</li>
+      <li>Si cambia de teléfono, toque «Restaurar compra anterior» en la pantalla del plan Premium.</li>
     </ul>
   </section>
 

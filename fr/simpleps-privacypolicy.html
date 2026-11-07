@@ -60,17 +60,14 @@
     <div class="article">
       <h2>3. Publicité</h2>
       <p>
-        Dans la version gratuite, des publicités sont affichées au moyen de « Google AdMob », un service de diffusion publicitaire fourni par Google LLC.<br>
-        Afin de diffuser les publicités et d'en mesurer l'efficacité, Google peut obtenir des informations telles que <strong>l'identifiant publicitaire, l'adresse IP, des informations sur l'appareil et le système d'exploitation, ainsi que des informations sur l'affichage des publicités et les appuis sur celles-ci</strong>. Les mots de passe, notes, ToDo, etc. enregistrés dans l'application ne sont jamais envoyés à des fins publicitaires.<br>
-        Pour savoir comment Google traite les informations, veuillez consulter la page <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">Comment Google utilise les informations des sites ou applications qui utilisent ses services</a>.<br>
-        L'identifiant publicitaire peut être réinitialisé ou supprimé depuis les paramètres de l'appareil. Aucune publicité n'est affichée pendant que vous utilisez le plan Premium.
+        La présente application n'affiche aucune publicité. Elle n'intègre aucun SDK publicitaire et ne collecte ni ne partage aucune information à des fins publicitaires.
       </p>
     </div>
     <div class="article">
       <h2>4. Abonnement (plan Premium)</h2>
       <p>
         Le paiement du plan Premium est traité par Google Play. Le développeur n'obtient aucune information de paiement, comme le numéro de carte de crédit.<br>
-        Afin de vérifier si le plan Premium est actif, l'application reçoit de Google Play des informations sur l'existence d'un achat et sur sa date d'expiration, et les conserve sur l'appareil.
+        Afin de vérifier si le plan Premium est actif, l'application interroge Google Play sur l'état de l'achat à chaque démarrage ou retour au premier plan, et conserve le résultat sur l'appareil.
       </p>
     </div>
     <div class="article">
@@ -80,9 +77,12 @@
       </p>
     </div>
     <div class="article">
-      <h2>6. Exportation des données (CSV)</h2>
+      <h2>6. Exportation des données (CSV et sauvegarde chiffrée)</h2>
       <p>
         Les fichiers créés par l'exportation CSV contiennent les mots de passe tels quels (en clair). Veuillez gérer vous-même l'emplacement d'enregistrement et le traitement des fichiers exportés.
+      </p>
+      <p>
+        Les fichiers créés par la sauvegarde chiffrée sont chiffrés avec un mot de passe de sauvegarde que vous choisissez et ne peuvent pas être lus par une personne qui ne connaît pas ce mot de passe. Le fichier est enregistré uniquement sur votre appareil ou à l'emplacement que vous choisissez, et n'est jamais envoyé aux serveurs du développeur. Le mot de passe de sauvegarde n'est ni enregistré ni transmis et le développeur ne peut pas le connaître : en cas d'oubli, la sauvegarde ne peut pas être restaurée.
       </p>
     </div>
     <div class="article">
@@ -110,7 +110,7 @@
         Le développeur n'assume aucune responsabilité pour la perte de données ou les dommages résultant de l'utilisation de la présente application. Toutefois, en cas de bug ou de panne, il s'efforcera, dans la mesure du possible, de les corriger et d'apporter des améliorations.
       </p>
     </div>
-    <p class="signature">Date de révision : 25 septembre 2026<br>Développeur : Shinichi HASEGAWA</p>
+    <p class="signature">Date de révision : 7 novembre 2026<br>Développeur : Shinichi HASEGAWA</p>
   </section>
 </main>
 

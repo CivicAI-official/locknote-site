@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cómo usar | LockNote</title>
+  <meta name="description" content="Cómo usar LockNote. Desde la configuración inicial hasta el uso de las contraseñas, las tareas (To Do) y las notas, explicado con las pantallas reales." />
+  <style>
+    /* ============================================================
+       Reset / base
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:    #5C6BC0;
+      --primary-dk: #3949AB;
+      --accent:     #FFB300;
+      --tap:        #E53935;
+      --bg:         #F5F6FA;
+      --surface:    #FFFFFF;
+      --text:       #212121;
+      --text-sub:   #555555;
+      --border:     #E0E0E0;
+      --radius:     12px;
+      --shadow:     0 2px 12px rgba(0,0,0,.08);
+    }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+
+    body {
+      font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", "Meiryo", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      font-size: 17px;
+    }
+
+    a { color: var(--primary-dk); }
+    img { max-width: 100%; display: block; }
+
+    /* ============================================================
+       Header / nav
+    ============================================================ */
+    header {
+      background: var(--primary);
+      color: #fff;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,.2);
+    }
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 56px;
+      gap: 12px;
+    }
+    .site-title {
+      font-size: 17px;
+      font-weight: 700;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .site-title .icon { font-size: 22px; }
+
+    nav { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+    nav a {
+      color: rgba(255,255,255,.9);
+      font-size: 14px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background .15s;
+    }
+    nav a:hover, nav a.active {
+      background: rgba(255,255,255,.2);
+      color: #fff;
+    }
+
+    /* ============================================================
+       Hero
+    ============================================================ */
+    .hero {
+      background: linear-gradient(135deg, var(--primary-dk) 0%, var(--primary) 100%);
+      color: #fff;
+      text-align: center;
+      padding: 44px 20px 40px;
+    }
+    .hero h1 { font-size: clamp(24px, 5vw, 32px); font-weight: 700; margin-bottom: 10px; }
+    .hero p  { font-size: 17px; opacity: .92; max-width: 560px; margin: 0 auto; }
+
+    /* ============================================================
+       Main layout
+    ============================================================ */
+    main {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 32px 16px 64px;
+    }
+
+    /* ============================================================
+       Table of contents
+    ============================================================ */
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow);
+    }
+    .toc h2 {
+      font-size: 15px;
+      letter-spacing: .08em;
+      color: var(--text-sub);
+      margin-bottom: 10px;
+    }
+    .toc ol {
+      padding-left: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 6px 24px;
+    }
+    .toc li { font-size: 16px; }
+
+    /* ============================================================
+       How-to-read legend
+    ============================================================ */
+    .howto {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #FFF;
+      border: 2px solid #FFCDD2;
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin-bottom: 32px;
+      font-size: 16px;
+    }
+    .howto .legend {
+      flex-shrink: 0;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      border: 4px solid var(--tap);
+      background: rgba(229,57,53,.12);
+    }
+
+    /* ============================================================
+       Common section styles
+    ============================================================ */
+    .section {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 28px 32px;
+      margin-bottom: 28px;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--primary);
+    }
+    .section-header .num {
+      background: var(--primary);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .section-header h2 { font-size: 21px; font-weight: 700; line-height: 1.4; }
+    .section h3 { font-size: 18px; margin: 28px 0 12px; }
+    .section h3:first-of-type { margin-top: 8px; }
+    .lead { margin-bottom: 16px; }
+
+    /* ============================================================
+       Steps
+    ============================================================ */
+    .steps { list-style: none; counter-reset: step; }
+    .steps li {
+      counter-increment: step;
+      display: flex;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .steps li::before {
+      content: counter(step);
+      background: var(--primary);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      min-width: 30px; height: 30px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .steps li strong { font-size: 17px; }
+    .steps li p { margin-top: 4px; font-size: 16px; color: var(--text-sub); }
+
+    /* ============================================================
+       Screenshots
+    ============================================================ */
+    .shots {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 24px 0 8px;
+    }
+    .shot {
+      width: 230px;
+      max-width: 100%;
+      text-align: center;
+    }
+    .shot .frame {
+      background: #1F1F1F;
+      padding: 8px;
+      border-radius: 26px;
+      box-shadow: 0 4px 16px rgba(0,0,0,.18);
+    }
+    .shot .screen {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #FDF7FF;
+    }
+    .shot.dialog .frame { background: transparent; padding: 0; box-shadow: none; }
+    .shot.dialog .screen { border-radius: 22px; box-shadow: 0 4px 16px rgba(0,0,0,.18); }
+    .shot img { width: 100%; height: auto; }
+    .shot figcaption {
+      margin-top: 10px;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--text-sub);
+    }
+    .shot figcaption b { color: var(--text); display: block; font-size: 16px; }
+
+    /* Red circles marking where to tap */
+    .tap {
+      position: absolute;
+      width: 20%;
+      aspect-ratio: 1 / 1;
+      border: 3px solid var(--tap);
+      background: rgba(229,57,53,.14);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .tap.sm { width: 14%; }
+    .tap.wide { width: 86%; aspect-ratio: auto; height: 7%; border-radius: 999px; }
+
+    /* ============================================================
+       Point / warning boxes
+    ============================================================ */
+    .point-box, .warn-box {
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 18px 0;
+      font-size: 16px;
+    }
+    .point-box { background: #EDE7F6; border-left: 5px solid var(--primary); }
+    .point-box strong { color: var(--primary-dk); }
+    .warn-box { background: #FFF8E1; border-left: 5px solid var(--accent); }
+    .warn-box strong { color: #B34700; }
+
+    /* ============================================================
+       Card grid
+    ============================================================ */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .card .card-icon { font-size: 26px; margin-bottom: 6px; }
+    .card h3 { font-size: 17px; font-weight: 700; margin: 0 0 4px; }
+    .card p  { font-size: 15px; color: var(--text-sub); }
+
+    /* ============================================================
+       Table
+    ============================================================ */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 16px; }
+    th, td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    thead th { background: var(--bg); border-bottom: 2px solid var(--border); }
+    td:first-child { white-space: nowrap; font-weight: 600; }
+
+    /* ============================================================
+       Premium
+    ============================================================ */
+    .badge-premium {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--accent);
+      color: #212121;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 20px;
+      vertical-align: middle;
+      margin-left: 6px;
+    }
+    .price-box {
+      background: linear-gradient(135deg, #EDE7F6, #E8EAF6);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .price-box .big { font-size: 20px; font-weight: 700; color: var(--primary-dk); margin-bottom: 4px; }
+    .notes { margin-top: 20px; font-size: 15px; color: var(--text-sub); padding-left: 1.2em; }
+    .notes li { margin-bottom: 4px; }
+
+    /* ============================================================
+       Footer
+    ============================================================ */
+    footer {
+      background: #37474F;
+      color: rgba(255,255,255,.8);
+      text-align: center;
+      padding: 28px 16px;
+      font-size: 14px;
+    }
+    footer nav { justify-content: center; gap: 8px; margin-bottom: 10px; }
+    footer nav a { color: rgba(255,255,255,.8); font-size: 14px; padding: 4px 8px; }
+    footer nav a:hover { color: #fff; }
+
+    /* ============================================================
+       Responsive
+    ============================================================ */
+    @media (max-width: 600px) {
+      html { scroll-padding-top: 0; }
+      header { position: static; }
+      .header-inner { padding: 10px 0; flex-direction: column; align-items: flex-start; }
+      nav { justify-content: flex-start; }
+      .section { padding: 22px 16px 26px; }
+      .shots { gap: 16px; }
+      .shot { width: calc(50% - 8px); }
+      .shot.single { width: 72%; }
+      .card-grid { grid-template-columns: 1fr; }
+    }
+    /* ---- 言語切り替え・翻訳の注記（多言語対応） ---- */
+    .lang-bar { border-bottom: 1px solid rgba(255,255,255,.18); }
+    .lang-inner {
+      max-width: 960px; margin: 0 auto; padding: 5px 0;
+      display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 2px;
+      font-size: 13px; line-height: 1.4;
+    }
+    .lang-inner .globe { margin-right: 4px; }
+    .lang-inner a { color: rgba(255,255,255,.88); text-decoration: none; padding: 3px 9px; border-radius: 999px; }
+    .lang-inner a:hover { background: rgba(255,255,255,.2); color: #fff; }
+    .lang-inner a[aria-current="page"] { background: #fff; color: #3949AB; font-weight: 700; }
+    .shot-note { font-size: 15px; color: #555; background: #fff; border-left: 5px solid #5C6BC0; border-radius: 0 8px 8px 0; padding: 10px 14px; margin: -16px 0 32px; }
+    .translation-note { background: #FFF8E1; border: 1px solid #FFE082; border-radius: 10px; padding: 12px 16px; margin-bottom: 20px; font-size: 15px; }
+    html[lang="ko"] body { font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif; }
+    html[lang="en"] body, html[lang="es"] body, html[lang="fr"] body, html[lang="de"] body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    @media (max-width: 600px) { .lang-inner { justify-content: flex-start; } }
+  </style>
+  <link rel="alternate" hreflang="ja" href="https://civicai-official.github.io/locknote-site/guide.html" />
+  <link rel="alternate" hreflang="en" href="https://civicai-official.github.io/locknote-site/en/guide.html" />
+  <link rel="alternate" hreflang="ko" href="https://civicai-official.github.io/locknote-site/ko/guide.html" />
+  <link rel="alternate" hreflang="es" href="https://civicai-official.github.io/locknote-site/es/guide.html" />
+  <link rel="alternate" hreflang="fr" href="https://civicai-official.github.io/locknote-site/fr/guide.html" />
+  <link rel="alternate" hreflang="de" href="https://civicai-official.github.io/locknote-site/de/guide.html" />
+  <link rel="alternate" hreflang="x-default" href="https://civicai-official.github.io/locknote-site/guide.html" />
+</head>
+<body>
+
+<!-- ============================================================
+     Encabezado
+============================================================ -->
+<header>
+  <div class="lang-bar">
+    <div class="lang-inner"><span class="globe" aria-hidden="true">🌐</span><a href="../guide.html" hreflang="ja" lang="ja">日本語</a> <a href="../en/guide.html" hreflang="en" lang="en">English</a> <a href="../ko/guide.html" hreflang="ko" lang="ko">한국어</a> <a href="../es/guide.html" hreflang="es" lang="es" aria-current="page">Español</a> <a href="../fr/guide.html" hreflang="fr" lang="fr">Français</a> <a href="../de/guide.html" hreflang="de" lang="de">Deutsch</a></div>
+  </div>
+  <div class="header-inner">
+    <div class="site-title">
+      <span class="icon">🔐</span>
+      LockNote
+    </div>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="guide.html" class="active">Cómo usar</a>
+      <a href="terms.html">Términos de uso</a>
+      <a href="privacy.html">Política de privacidad</a>
+      <a href="legal.html">Aviso legal</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>📖 Guía de uso</h1>
+  <p>Le explicamos, con imágenes de las pantallas reales, desde la configuración inicial hasta cómo usar las contraseñas, las tareas (To Do) y las notas.</p>
+</div>
+
+<main>
+
+  <!-- Índice -->
+  <div class="toc">
+    <h2>Índice</h2>
+    <ol>
+      <li><a href="#sec-setup">Configuración inicial</a></li>
+      <li><a href="#sec-screens">Las pantallas de la aplicación</a></li>
+      <li><a href="#sec-unlock">Abrir la aplicación (desbloquear)</a></li>
+      <li><a href="#sec-add">Registrar una contraseña</a></li>
+      <li><a href="#sec-view">Ver y copiar una contraseña</a></li>
+      <li><a href="#sec-search">Buscar</a></li>
+      <li><a href="#sec-generator">Crear una contraseña segura</a></li>
+      <li><a href="#sec-edit">Corregir y eliminar</a></li>
+      <li><a href="#sec-todo">Tareas (To Do)</a></li>
+      <li><a href="#sec-memo">Notas</a></li>
+      <li><a href="#sec-security">Cómo funciona la seguridad</a></li>
+      <li><a href="#sec-settings">Configuración</a></li>
+      <li><a href="#sec-csv">Guardar y restaurar con CSV</a></li>
+      <li><a href="#sec-premium">Plan Premium</a></li>
+    </ol>
+  </div>
+
+  <div class="howto">
+    <span class="legend" aria-hidden="true"></span>
+    <p>Los <strong style="color:var(--tap)">círculos rojos</strong> en las imágenes de la pantalla indican el lugar que debe tocar suavemente con el dedo.</p>
+  </div>
+  <p class="shot-note">Las imágenes de pantalla de esta página muestran la versión en japonés de la aplicación. En la versión en español, la disposición y los botones están en los mismos lugares.</p>
+
+  <!-- ============================================================
+       1. Configuración inicial
+  ============================================================ -->
+  <section class="section" id="sec-setup">
+    <div class="section-header">
+      <div class="num">1</div>
+      <h2>Configuración inicial</h2>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>Elegir el idioma</strong>
+          <p>La primera vez que abra la aplicación, aparecerá una pantalla para elegir el idioma. Elija «Español» y toque el botón de abajo, «Start with this language». Puede cambiar el idioma más tarde en la pantalla de configuración.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Aceptar los Términos de uso y la Política de privacidad</strong>
+          <p>Si toca el texto azul, puede leer su contenido. Cuando termine de leer, marque las 2 casillas de la derecha y toque «Aceptar y comenzar».</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Elegir un código PIN de 6 dígitos (número secreto)</strong>
+          <p>Escriba los 6 números que usará para abrir la aplicación y toque «Siguiente». Para confirmar, escriba otra vez los mismos números y toque «Establecer PIN». Si toca el icono del ojo, puede comprobar los números que escribió.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>¡Listo!</strong>
+          <p>Aparecerá la pantalla con la lista de contraseñas. Al principio no hay nada registrado.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="shots">
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/01-language.webp" width="540" height="1200" loading="lazy" alt="Pantalla para elegir el idioma. Se elige el idioma y se toca el botón de abajo">
+          <span class="tap wide" style="left:50%;top:91.3%"></span>
+        </div></div>
+        <figcaption><b>① Elegir el idioma</b>Toque el botón de abajo</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/02-terms.webp" width="540" height="1200" loading="lazy" alt="Pantalla para aceptar los Términos de uso y la Política de privacidad. Se marcan las 2 casillas">
+          <span class="tap sm" style="left:83%;top:74.7%"></span>
+          <span class="tap sm" style="left:83%;top:82.1%"></span>
+          <span class="tap wide" style="left:50%;top:92.3%"></span>
+        </div></div>
+        <figcaption><b>② Aceptar</b>Marque las 2 casillas y toque el botón de abajo</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/03-pin-setup.webp" width="540" height="1200" loading="lazy" alt="Pantalla para elegir el código PIN. Se escriben 6 dígitos con los botones de números">
+        </div></div>
+        <figcaption><b>③ Elegir el código PIN</b>Escriba 6 números (2 veces)</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/04-home-empty.webp" width="540" height="1200" loading="lazy" alt="Pantalla con la lista de contraseñas después de la configuración. Todavía no hay nada registrado">
+        </div></div>
+        <figcaption><b>④ Listo</b>Pantalla con la lista de contraseñas</figcaption>
+      </figure>
+    </div>
+
+    <div class="warn-box">
+      <strong>⚠️ No olvide su código PIN</strong><br>
+      Si olvida el código PIN, ya no podrá ver los datos guardados en la aplicación. Para no olvidarlo, puede, por ejemplo, anotarlo en un papel y compartirlo con su familia.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       2. Las pantallas de la aplicación
+  ============================================================ -->
+  <section class="section" id="sec-screens">
+    <div class="section-header">
+      <div class="num">2</div>
+      <h2>Las pantallas de la aplicación</h2>
+    </div>
+
+    <p class="lead">En la parte de abajo de la pantalla hay 3 botones. Al tocarlos, cambia la pantalla.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">🔒</div>
+        <h3>Contraseñas</h3>
+        <p>Guarda el ID (nombre de usuario) y la contraseña de cada servicio.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">☑️</div>
+        <h3>Tareas</h3>
+        <p>Un lugar para anotar lo que tiene que hacer. Puede recibir un aviso (notificación) en la fecha y hora límite.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📝</div>
+        <h3>Notas</h3>
+        <p>Un bloc de notas donde puede escribir libremente. Puede ordenarlas con etiquetas.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:18px;">Arriba a la derecha de la pantalla, el <strong>⚙️ engranaje</strong> abre la configuración y el <strong>🔒 candado</strong> es el botón para bloquear la aplicación al instante.</p>
+
+    <div class="point-box">
+      <strong>👀 Cuando la aplicación está en «solo lectura»</strong><br>
+      Antes de empezar la prueba gratuita del <a href="#sec-premium">plan Premium</a>, o después de cancelar, la aplicación queda en «solo lectura»: puede ver y copiar sus datos, pero no añadir ni editar nada. La aplicación no muestra anuncios.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       3. Desbloquear
+  ============================================================ -->
+  <section class="section" id="sec-unlock">
+    <div class="section-header">
+      <div class="num">3</div>
+      <h2>Abrir la aplicación (desbloquear)</h2>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>Escribir el código PIN</strong>
+          <p>Al abrir la aplicación, aparece la pantalla «Desbloquear». Escriba los 6 números que eligió y la aplicación se abrirá automáticamente.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>También puede abrirla con su huella o su cara</strong>
+          <p>Si su teléfono tiene registrada su huella dactilar o su cara, puede abrir la aplicación sin el código PIN, con el icono de huella de abajo a la izquierda.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="shots">
+      <figure class="shot single">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/05-lock.webp" width="540" height="1200" loading="lazy" alt="Pantalla «Desbloquear». Se escribe el código PIN con los botones de números. Abajo a la izquierda, el icono de huella">
+          <span class="tap sm" style="left:18.9%;top:62.1%"></span>
+        </div></div>
+        <figcaption><b>Pantalla «Desbloquear»</b>Abajo a la izquierda: botón para abrir con huella o cara</figcaption>
+      </figure>
+    </div>
+
+    <div class="point-box">
+      <strong>⏱️ Se bloquea automáticamente</strong><br>
+      Si cambia a otra aplicación y pasan 60 segundos, la aplicación se bloquea automáticamente.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       4. Registrar una contraseña
+  ============================================================ -->
+  <section class="section" id="sec-add">
+    <div class="section-header">
+      <div class="num">4</div>
+      <h2>Registrar una contraseña</h2>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>Toque «+ Agregar nuevo» abajo a la derecha</strong>
+          <p>Se abre la pantalla de registro.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>En «Nombre URL», escriba un nombre que le ayude a saber de qué servicio se trata</strong>
+          <p>Por ejemplo: «Google», «Amazon», «Banco ○○», etc.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Escriba el «ID / Usuario»</strong>
+          <p>Es el ID, el correo electrónico, el número de teléfono, etc., que usa para iniciar sesión.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Escriba la «Contraseña»</strong>
+          <p>Con el icono del ojo puede mostrar u ocultar lo que escribió. Si todavía no ha decidido una, con el icono de la flecha circular que está al lado <a href="#sec-generator">puede crearla automáticamente</a>.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>En «Nota (opcional)», puede escribir algo o dejarlo en blanco</strong>
+          <p>Puede anotar, por ejemplo, una palabra clave o algo que deba tener en cuenta al iniciar sesión.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Toque «Guardar»</strong>
+          <p>Se añade a la lista. La lista se ordena por nombre.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="shots">
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/04-home-empty.webp" width="540" height="1200" loading="lazy" alt="Pantalla con la lista de contraseñas. El botón «Agregar nuevo» abajo a la derecha">
+          <span class="tap" style="left:79.7%;top:84.1%;width:34%;aspect-ratio:auto;height:7.5%;border-radius:999px"></span>
+        </div></div>
+        <figcaption><b>① Agregar nuevo</b>Toque el botón de abajo a la derecha</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/07-add.webp" width="540" height="1200" loading="lazy" alt="Pantalla de registro de contraseña. Se escriben el nombre URL, el ID, la contraseña y la nota, y se guarda">
+          <span class="tap wide" style="left:50%;top:53.6%"></span>
+        </div></div>
+        <figcaption><b>② Escribir y guardar</b>Rellene los 4 campos y toque «Guardar»</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/06-home-list.webp" width="540" height="1200" loading="lazy" alt="Pantalla con la lista de contraseñas ya registradas">
+        </div></div>
+        <figcaption><b>③ Se añade a la lista</b>Aparece lo que registró</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       5. Ver y copiar
+  ============================================================ -->
+  <section class="section" id="sec-view">
+    <div class="section-header">
+      <div class="num">5</div>
+      <h2>Ver y copiar una contraseña</h2>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>En la lista, toque el servicio que quiere ver</strong>
+          <p>Se abre la pantalla de detalles.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Muestre la contraseña con el icono del ojo</strong>
+          <p>Al principio está oculta con «●●●». Si toca el icono del ojo, verá el texto.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Copie con el icono de dos cuadrados superpuestos</strong>
+          <p>Si toca el icono que está al lado del ID, de la contraseña o de la nota, se copia. Después, en la pantalla donde inicia sesión, use «Pegar» para escribirlo.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="shots">
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/08-detail.webp" width="540" height="1200" loading="lazy" alt="Pantalla de detalles de la contraseña. La contraseña está oculta con ●. El icono del ojo y el icono de copiar">
+          <span class="tap sm" style="left:76.4%;top:30.9%"></span>
+          <span class="tap sm" style="left:88.4%;top:30.9%"></span>
+        </div></div>
+        <figcaption><b>Pantalla de detalles</b>Izquierda: el ojo; derecha: copiar</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/09-detail-show.webp" width="540" height="1200" loading="lazy" alt="Pantalla con la contraseña visible después de tocar el icono del ojo">
+        </div></div>
+        <figcaption><b>Mostrar la contraseña</b>Toque otra vez para ocultarla</figcaption>
+      </figure>
+    </div>
+
+    <div class="point-box">
+      <strong>🔒 Lo que copia se borra a los 30 segundos</strong><br>
+      Para que otras personas no la vean, la contraseña copiada se borra automáticamente a los 30 segundos. Si no le dio tiempo, cópiela otra vez.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       6. Buscar
+  ============================================================ -->
+  <section class="section" id="sec-search">
+    <div class="section-header">
+      <div class="num">6</div>
+      <h2>Buscar</h2>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>Toque «Buscar por URL, ID o nota», arriba de la lista</strong>
+          <p>Podrá escribir texto.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Escriba la palabra que busca</strong>
+          <p>Al instante se muestran solo los elementos que contienen esa palabra.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="point-box">
+      <strong>💡 Qué se puede buscar</strong><br>
+      Se busca en 3 cosas: el nombre URL (nombre del servicio), el ID y la nota. No se puede buscar por la contraseña misma.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       7. Generar contraseñas
+  ============================================================ -->
+  <section class="section" id="sec-generator">
+    <div class="section-header">
+      <div class="num">7</div>
+      <h2>Crear una contraseña segura</h2>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>En la pantalla de registro o de edición, toque el icono de la flecha circular que está a la derecha del campo de contraseña</strong>
+          <p>Con un solo toque, se escribe automáticamente una contraseña segura de 16 caracteres.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Después, toque «Guardar»</strong>
+          <p>Si quiere crear otra, toque el icono otra vez.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="shots">
+      <figure class="shot single">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/10-generate.webp" width="540" height="1200" loading="lazy" alt="Al tocar el icono de la flecha circular, a la derecha del campo de contraseña, se escribe una contraseña nueva">
+          <span class="tap sm" style="left:88.4%;top:31.9%"></span>
+        </div></div>
+        <figcaption><b>Crear una contraseña automáticamente</b>Toque el icono de la flecha circular</figcaption>
+      </figure>
+    </div>
+
+    <div class="point-box">
+      <strong>🎲 La contraseña que se crea</strong><br>
+      Tiene 16 caracteres que mezclan letras mayúsculas y minúsculas, números y símbolos. Es difícil de adivinar para otras personas y, por eso, es segura.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       8. Editar y eliminar
+  ============================================================ -->
+  <section class="section" id="sec-edit">
+    <div class="section-header">
+      <div class="num">8</div>
+      <h2>Corregir y eliminar</h2>
+    </div>
+
+    <h3>✏️ Corregir</h3>
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>En la pantalla de detalles, toque el icono del lápiz arriba a la derecha</strong>
+          <p>Se abre la pantalla «Editar».</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Cambie lo que quiera corregir y toque «Guardar»</strong>
+        </div>
+      </li>
+    </ol>
+
+    <h3>🗑️ Eliminar</h3>
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>En la pantalla de detalles, toque el icono de la papelera arriba a la derecha</strong>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>En la ventana de confirmación, toque «Eliminar»</strong>
+          <p>Si cambia de idea, toque «Cancelar».</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="shots">
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/08-detail.webp" width="540" height="1200" loading="lazy" alt="Arriba a la derecha de la pantalla de detalles, el icono del lápiz y el icono de la papelera">
+          <span class="tap sm" style="left:82.5%;top:5.5%"></span>
+          <span class="tap sm" style="left:94%;top:5.5%;width:11%"></span>
+        </div></div>
+        <figcaption><b>Iconos de arriba a la derecha</b>Izquierda: corregir; derecha: eliminar</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/11-delete.webp" width="540" height="1200" loading="lazy" alt="Ventana para confirmar la eliminación. Los botones «Cancelar» y «Eliminar»">
+          <span class="tap" style="left:74.5%;top:56.5%;width:22%;aspect-ratio:auto;height:6%;border-radius:999px"></span>
+        </div></div>
+        <figcaption><b>Confirmar eliminación</b>Con «Eliminar», se borra</figcaption>
+      </figure>
+    </div>
+
+    <div class="warn-box">
+      <strong>⚠️ Lo que elimina no se puede recuperar</strong><br>
+      Antes de eliminar, compruebe que de verdad quiere borrarlo.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       9. Tareas (To Do)
+  ============================================================ -->
+  <section class="section" id="sec-todo">
+    <div class="section-header">
+      <div class="num">9</div>
+      <h2>Tareas (To Do)</h2>
+    </div>
+
+    <p class="lead">Puede anotar lo que tiene que hacer, como pedir cita en el hospital o entregar documentos. También puede recibir una notificación en el teléfono en la fecha y hora límite.</p>
+
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>Toque «Tareas» abajo y después «+ Nueva tarea» abajo a la derecha</strong>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>En «Título», escriba lo que tiene que hacer</strong>
+          <p>En «Descripción (opcional)» puede anotar, por ejemplo, las cosas que debe llevar (no es obligatorio).</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Elija la «Fecha límite» y la «Hora (opcional)» (si lo desea)</strong>
+          <p>Si también elige la hora, podrá activar la «Notificación».</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Si quiere recibir un aviso, active el interruptor de «Notificación»</strong>
+          <p>La primera vez que lo active, el teléfono le preguntará «¿Permitir notificaciones?». Elija «Permitir».</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Toque «Guardar»</strong>
+          <p>La lista se divide en «Vencidas», «Hoy», «Próximamente» y «Completadas».</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Cuando termine, toque la casilla de la izquierda para marcarla</strong>
+          <p>La tarea pasa a «Completadas». Si la toca otra vez, vuelve a su lugar.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="shots">
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/12-todo-list.webp" width="540" height="1200" loading="lazy" alt="Pantalla con la lista de tareas, dividida en «Próximamente» y «Completadas»">
+          <span class="tap sm" style="left:12.3%;top:18.3%"></span>
+          <span class="tap" style="left:78.8%;top:84.1%;width:34%;aspect-ratio:auto;height:7.5%;border-radius:999px"></span>
+        </div></div>
+        <figcaption><b>Lista de tareas</b>Casilla de la izquierda: completar; abajo a la derecha: añadir</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/13-todo-edit.webp" width="540" height="1200" loading="lazy" alt="Pantalla para escribir una tarea. Título, descripción, fecha límite, hora e interruptor de notificación">
+          <span class="tap sm" style="left:86.3%;top:55%"></span>
+        </div></div>
+        <figcaption><b>Escribir una tarea</b>Active «Notificación» para recibir un aviso</figcaption>
+      </figure>
+    </div>
+
+    <div class="point-box">
+      <strong>🔔 El icono de notificación</strong><br>
+      Las tareas con la notificación activada muestran una campana a la derecha en la lista. Según la configuración de ahorro de batería del teléfono, la notificación puede llegar con unos minutos de retraso.
+    </div>
+    <p style="font-size:16px;color:var(--text-sub);">Para corregir una tarea, tóquela en la lista. Para eliminarla, toque el icono de la papelera arriba a la derecha de la pantalla que se abre.</p>
+  </section>
+
+  <!-- ============================================================
+       10. Notas
+  ============================================================ -->
+  <section class="section" id="sec-memo">
+    <div class="section-header">
+      <div class="num">10</div>
+      <h2>Notas</h2>
+    </div>
+
+    <h3>📝 Escribir una nota</h3>
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>Toque «Notas» abajo y después «+ Nueva nota» abajo a la derecha</strong>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Escriba el título y el texto</strong>
+          <p>Si tiene etiquetas, puede ponerlas tocando la etiqueta que aparece debajo del título (puede poner todas las que quiera).</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Toque el icono ✓ arriba a la derecha para guardar</strong>
+        </div>
+      </li>
+    </ol>
+
+    <h3>🏷️ Ordenar con etiquetas</h3>
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>En la pantalla de notas, toque el icono de etiqueta arriba a la derecha</strong>
+          <p>Se abre la pantalla «Gestión de etiquetas».</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Cree una etiqueta con el «+» de abajo a la derecha</strong>
+          <p>Por ejemplo: «Familia», «Salud», «Aficiones». Con el lápiz puede cambiar el nombre y con la papelera puede eliminarla. Aunque elimine una etiqueta, las notas no se borran.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Si toca una etiqueta arriba de la lista, se muestran solo las notas con esa etiqueta</strong>
+          <p>En el campo de búsqueda de arriba, puede buscar por el título y el texto.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="shots">
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/14-memo-list.webp" width="540" height="1200" loading="lazy" alt="Pantalla con la lista de notas. Arriba, el campo de búsqueda y los botones de etiquetas; arriba a la derecha, el icono de etiqueta">
+          <span class="tap sm" style="left:70.8%;top:5.5%"></span>
+          <span class="tap" style="left:57%;top:19.1%;width:48%;aspect-ratio:auto;height:5%;border-radius:999px"></span>
+        </div></div>
+        <figcaption><b>Lista de notas</b>Filtre con las etiquetas de arriba</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/15-memo-edit.webp" width="540" height="1200" loading="lazy" alt="Pantalla para escribir una nota. Debajo del título, las etiquetas; arriba a la derecha, el icono para guardar">
+          <span class="tap sm" style="left:50%;top:19.1%"></span>
+          <span class="tap sm" style="left:94%;top:5.5%;width:11%"></span>
+        </div></div>
+        <figcaption><b>Escribir una nota</b>Toque una etiqueta para ponerla; ✓ para guardar</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/16-labels.webp" width="540" height="1200" loading="lazy" alt="Pantalla «Gestión de etiquetas». La lista de etiquetas y el botón para añadir, abajo a la derecha">
+          <span class="tap sm" style="left:89%;top:92.8%"></span>
+        </div></div>
+        <figcaption><b>Gestión de etiquetas</b>Cree una con el «+» de abajo a la derecha</figcaption>
+      </figure>
+    </div>
+
+    <div class="point-box">
+      <strong>🔐 Las notas y las tareas también se guardan cifradas</strong><br>
+      Lo que escriba se guarda cifrado en un lugar de almacenamiento seguro del teléfono, igual que las contraseñas. Aun así, le recomendamos registrar las contraseñas en la pantalla «Contraseñas», donde puede usar funciones útiles como copiarlas o crearlas automáticamente.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       11. Seguridad
+  ============================================================ -->
+  <section class="section" id="sec-security">
+    <div class="section-header">
+      <div class="num">11</div>
+      <h2>Cómo funciona la seguridad</h2>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">🔢</div>
+        <h3>Bloqueo con código PIN</h3>
+        <p>Quien no conozca el código PIN de 6 dígitos no puede abrir la aplicación.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">👆</div>
+        <h3>Desbloqueo con huella o cara</h3>
+        <p>Si tiene su huella o su cara registrada en el teléfono, también puede abrirla así.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⏱️</div>
+        <h3>Bloqueo automático</h3>
+        <p>Si cambia a otra aplicación y pasan 60 segundos, se bloquea automáticamente.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🚫</div>
+        <h3>Límite de intentos fallidos</h3>
+        <p>Si se equivoca 5 veces al escribir el código PIN, no podrá escribirlo durante 1 minuto. Si se sigue equivocando, el tiempo de espera aumenta: 10 minutos, 15 minutos…</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔐</div>
+        <h3>Datos guardados con cifrado</h3>
+        <p>Las contraseñas, las tareas y las notas se guardan cifradas en un lugar de almacenamiento seguro del teléfono.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📋</div>
+        <h3>Lo copiado se borra a los 30 segundos</h3>
+        <p>La contraseña copiada se borra automáticamente a los 30 segundos.</p>
+      </div>
+    </div>
+
+    <div class="point-box" style="margin-top: 20px;">
+      <strong>🛡️ Sus datos están solo en su teléfono</strong><br>
+      Las contraseñas, tareas y notas que registra nunca se envían a nuestros servidores ni a la nube. Como la aplicación no muestra anuncios, tampoco se comunica con empresas de publicidad (para más detalles, consulte la <a href="privacy.html">Política de privacidad</a>).
+    </div>
+    <div class="warn-box">
+      <strong>⚠️ Antes de cambiar de teléfono</strong><br>
+      Como los datos están solo en el teléfono, si lo pierde o cambia de teléfono, los datos también se pierden. Para mayor tranquilidad, haga una copia con la función <a href="#sec-csv">Guardar con CSV</a>.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       12. Configuración
+  ============================================================ -->
+  <section class="section" id="sec-settings">
+    <div class="section-header">
+      <div class="num">12</div>
+      <h2>Configuración</h2>
+    </div>
+
+    <p class="lead">Abra la pantalla de configuración con el icono del engranaje, arriba a la derecha.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Opción</th><th>Qué puede hacer</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>⭐ Plan Premium</td><td>Contratar (el primer mes es gratis) o consultar el plan Premium</td></tr>
+          <tr><td>⇅ Gestión CSV</td><td>Guardar las contraseñas en un archivo y restaurarlas desde un archivo (para restaurar se necesita el plan Premium)</td></tr>
+          <tr><td>🔢 Cambiar PIN</td><td>Escriba el código PIN actual y, después, el nuevo código PIN 2 veces</td></tr>
+          <tr><td>🎨 Tema</td><td>Elija el brillo de la pantalla entre «Modo claro», «Modo oscuro» y «Seguir configuración del sistema»</td></tr>
+          <tr><td>🌐 Idioma</td><td>Cambie entre japonés, English, 한국어, Español, Français y Deutsch</td></tr>
+          <tr><td>📄 Términos de Servicio y más</td><td>Abre «Términos de Servicio», «Política de Privacidad» y «Aviso Legal»</td></tr>
+          <tr><td>❓ Cómo usar</td><td>Abre esta página</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="shots">
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/17-settings.webp" width="540" height="923" loading="lazy" alt="Pantalla de configuración. Opciones como Plan Premium, Gestión CSV, Cambiar PIN, Tema, Idioma y Términos de Servicio">
+        </div></div>
+        <figcaption><b>Pantalla de configuración</b></figcaption>
+      </figure>
+      <figure class="shot dialog">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/19-language-setting.webp" width="540" height="818" loading="lazy" alt="Ventana para elegir el idioma: japonés, English, 한국어, Español, Français, Deutsch">
+        </div></div>
+        <figcaption><b>Cambiar el idioma</b>Elija uno y toque el botón de abajo a la derecha</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       13. CSV
+  ============================================================ -->
+  <section class="section" id="sec-csv">
+    <div class="section-header">
+      <div class="num">13</div>
+      <h2>Guardar y restaurar con CSV <span class="badge-premium">⭐ Importar: Premium</span></h2>
+    </div>
+
+    <p class="lead">Puede exportar las contraseñas registradas a un archivo (formato CSV) para tener una copia. Cuando cambie de teléfono, puede recuperarlas cargando ese archivo en el teléfono nuevo.</p>
+
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>En la pantalla de configuración, toque «Gestión CSV»</strong>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Para hacer una copia, toque «Exportar»</strong>
+          <p>Siga las indicaciones de la pantalla y elija dónde guardarla.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Para recuperar los datos, toque «Importar»</strong>
+          <p>Elija el archivo exportado y la forma de cargarlo (añadir / sobrescribir / reemplazar todo). Para importar se necesita el <a href="#sec-premium">plan Premium</a> (exportar se puede siempre).</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="shots">
+      <figure class="shot single">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/18-csv.webp" width="540" height="1200" loading="lazy" alt="Pantalla «Gestión CSV». Los botones «Exportar» e «Importar»">
+          <span class="tap wide" style="left:50%;top:27.6%;width:62%"></span>
+          <span class="tap wide" style="left:50%;top:49.3%;width:62%"></span>
+        </div></div>
+        <figcaption><b>Gestión CSV</b>Arriba: exportar; abajo: importar</figcaption>
+      </figure>
+    </div>
+
+    <div class="warn-box">
+      <strong>⚠️ Cuidado con el archivo exportado</strong><br>
+      El archivo contiene las contraseñas tal cual, sin ocultar. No lo envíe a otras personas ni lo deje en un lugar donde cualquiera pueda verlo. Cuando termine de usarlo, elimínelo.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       14. Plan Premium
+  ============================================================ -->
+  <section class="section" id="sec-premium">
+    <div class="section-header">
+      <div class="num">14</div>
+      <h2>Plan Premium <span class="badge-premium">⭐ PREMIUM</span></h2>
+    </div>
+
+    <div class="price-box">
+      <div class="big">🎁 El primer mes es gratis</div>
+      <div>Después, <strong>100 yenes al mes</strong> (impuestos incluidos, renovación automática)</div>
+      <div style="font-size: 15px; color: var(--text-sub); margin-top: 6px;">Puede cancelar en cualquier momento. Si cancela durante el período gratuito, no se le cobra nada. Aunque cancele, podrá seguir usándolo hasta el final del período.</div>
+    </div>
+
+    <h3>Qué incluye el plan Premium</h3>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">✏️</div>
+        <h3>Añadir y editar</h3>
+        <p>Puede añadir, editar y eliminar contraseñas, tareas y notas.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔐</div>
+        <h3>Restaurar una copia</h3>
+        <p>Puede recuperar sus datos desde un archivo de copia de seguridad cifrada.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📥</div>
+        <h3>Importar CSV</h3>
+        <p>Puede recuperar las contraseñas desde el archivo exportado.</p>
+      </div>
+    </div>
+
+    <div class="point-box" style="margin-top: 20px;">
+      <strong>👀 Sin el plan, la aplicación queda en «solo lectura»</strong><br>
+      Antes de empezar la prueba gratuita, o cuando termina el período después de cancelar, la aplicación queda en «solo lectura». Puede seguir viendo y copiando los datos guardados, crear copias de seguridad cifradas y exportar a CSV. Sus datos nunca se borran al terminar el plan.
+    </div>
+
+    <h3>Cómo contratarlo</h3>
+    <ol class="steps">
+      <li><div><strong>En la pantalla de configuración, toque «Plan Premium»</strong></div></li>
+      <li><div><strong>Toque «Empezar 1 mes gratis»</strong><p>Aparecerá la pantalla de Google Play. Revise el contenido y complete el trámite.</p></div></li>
+    </ol>
+
+    <ul class="notes">
+      <li>El pago se cobra a su cuenta de Google Play.</li>
+      <li>La prueba gratuita es solo para quienes se suscriben por primera vez.</li>
+      <li>Si no cancela al menos 24 horas antes de que termine el período gratuito o de la renovación, se le cobrarán automáticamente 100 yenes al mes (impuestos incluidos).</li>
+      <li>Puede cancelar en la aplicación Google Play, en «Pagos y suscripciones» → «Suscripciones». Eliminar la aplicación no cancela la suscripción.</li>
+      <li>Si cambia de teléfono, toque «Restaurar compra anterior» en la pantalla del plan Premium.</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="guide.html">Cómo usar</a>
+    <a href="terms.html">Términos de uso</a>
+    <a href="privacy.html">Política de privacidad</a>
+    <a href="legal.html">Aviso legal</a>
+  </nav>
+  <p>&copy; 2026 LockNote (CivicAI)</p>
+</footer>
+
+</body>
+</html>

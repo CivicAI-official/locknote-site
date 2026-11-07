@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>사용 방법 | LockNote</title>
+  <meta name="description" content="LockNote 사용 방법. 처음 설정부터 비밀번호·할 일·메모 사용 방법까지 실제 화면으로 설명합니다." />
+  <style>
+    /* ============================================================
+       리셋·기본
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:    #5C6BC0;
+      --primary-dk: #3949AB;
+      --accent:     #FFB300;
+      --tap:        #E53935;
+      --bg:         #F5F6FA;
+      --surface:    #FFFFFF;
+      --text:       #212121;
+      --text-sub:   #555555;
+      --border:     #E0E0E0;
+      --radius:     12px;
+      --shadow:     0 2px 12px rgba(0,0,0,.08);
+    }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+
+    body {
+      font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", "Meiryo", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      font-size: 17px;
+    }
+
+    a { color: var(--primary-dk); }
+    img { max-width: 100%; display: block; }
+
+    /* ============================================================
+       헤더·내비게이션
+    ============================================================ */
+    header {
+      background: var(--primary);
+      color: #fff;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,.2);
+    }
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 56px;
+      gap: 12px;
+    }
+    .site-title {
+      font-size: 17px;
+      font-weight: 700;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .site-title .icon { font-size: 22px; }
+
+    nav { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+    nav a {
+      color: rgba(255,255,255,.9);
+      font-size: 14px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background .15s;
+    }
+    nav a:hover, nav a.active {
+      background: rgba(255,255,255,.2);
+      color: #fff;
+    }
+
+    /* ============================================================
+       히어로
+    ============================================================ */
+    .hero {
+      background: linear-gradient(135deg, var(--primary-dk) 0%, var(--primary) 100%);
+      color: #fff;
+      text-align: center;
+      padding: 44px 20px 40px;
+    }
+    .hero h1 { font-size: clamp(24px, 5vw, 32px); font-weight: 700; margin-bottom: 10px; }
+    .hero p  { font-size: 17px; opacity: .92; max-width: 560px; margin: 0 auto; }
+
+    /* ============================================================
+       메인 레이아웃
+    ============================================================ */
+    main {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 32px 16px 64px;
+    }
+
+    /* ============================================================
+       목차
+    ============================================================ */
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow);
+    }
+    .toc h2 {
+      font-size: 15px;
+      letter-spacing: .08em;
+      color: var(--text-sub);
+      margin-bottom: 10px;
+    }
+    .toc ol {
+      padding-left: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 6px 24px;
+    }
+    .toc li { font-size: 16px; }
+
+    /* ============================================================
+       보는 법 설명
+    ============================================================ */
+    .howto {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #FFF;
+      border: 2px solid #FFCDD2;
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin-bottom: 32px;
+      font-size: 16px;
+    }
+    .howto .legend {
+      flex-shrink: 0;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      border: 4px solid var(--tap);
+      background: rgba(229,57,53,.12);
+    }
+
+    /* ============================================================
+       섹션 공통
+    ============================================================ */
+    .section {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 28px 32px;
+      margin-bottom: 28px;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--primary);
+    }
+    .section-header .num {
+      background: var(--primary);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .section-header h2 { font-size: 21px; font-weight: 700; line-height: 1.4; }
+    .section h3 { font-size: 18px; margin: 28px 0 12px; }
+    .section h3:first-of-type { margin-top: 8px; }
+    .lead { margin-bottom: 16px; }
+
+    /* ============================================================
+       단계
+    ============================================================ */
+    .steps { list-style: none; counter-reset: step; }
+    .steps li {
+      counter-increment: step;
+      display: flex;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .steps li::before {
+      content: counter(step);
+      background: var(--primary);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      min-width: 30px; height: 30px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .steps li strong { font-size: 17px; }
+    .steps li p { margin-top: 4px; font-size: 16px; color: var(--text-sub); }
+
+    /* ============================================================
+       스크린숏
+    ============================================================ */
+    .shots {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 24px 0 8px;
+    }
+    .shot {
+      width: 230px;
+      max-width: 100%;
+      text-align: center;
+    }
+    .shot .frame {
+      background: #1F1F1F;
+      padding: 8px;
+      border-radius: 26px;
+      box-shadow: 0 4px 16px rgba(0,0,0,.18);
+    }
+    .shot .screen {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #FDF7FF;
+    }
+    .shot.dialog .frame { background: transparent; padding: 0; box-shadow: none; }
+    .shot.dialog .screen { border-radius: 22px; box-shadow: 0 4px 16px rgba(0,0,0,.18); }
+    .shot img { width: 100%; height: auto; }
+    .shot figcaption {
+      margin-top: 10px;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--text-sub);
+    }
+    .shot figcaption b { color: var(--text); display: block; font-size: 16px; }
+
+    /* 탭하는 곳의 빨간 동그라미 */
+    .tap {
+      position: absolute;
+      width: 20%;
+      aspect-ratio: 1 / 1;
+      border: 3px solid var(--tap);
+      background: rgba(229,57,53,.14);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .tap.sm { width: 14%; }
+    .tap.wide { width: 86%; aspect-ratio: auto; height: 7%; border-radius: 999px; }
+
+    /* ============================================================
+       포인트 상자
+    ============================================================ */
+    .point-box, .warn-box {
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 18px 0;
+      font-size: 16px;
+    }
+    .point-box { background: #EDE7F6; border-left: 5px solid var(--primary); }
+    .point-box strong { color: var(--primary-dk); }
+    .warn-box { background: #FFF8E1; border-left: 5px solid var(--accent); }
+    .warn-box strong { color: #B34700; }
+
+    /* ============================================================
+       카드 목록
+    ============================================================ */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .card .card-icon { font-size: 26px; margin-bottom: 6px; }
+    .card h3 { font-size: 17px; font-weight: 700; margin: 0 0 4px; }
+    .card p  { font-size: 15px; color: var(--text-sub); }
+
+    /* ============================================================
+       표
+    ============================================================ */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 16px; }
+    th, td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    thead th { background: var(--bg); border-bottom: 2px solid var(--border); }
+    td:first-child { white-space: nowrap; font-weight: 600; }
+
+    /* ============================================================
+       프리미엄
+    ============================================================ */
+    .badge-premium {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--accent);
+      color: #212121;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 20px;
+      vertical-align: middle;
+      margin-left: 6px;
+    }
+    .price-box {
+      background: linear-gradient(135deg, #EDE7F6, #E8EAF6);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .price-box .big { font-size: 20px; font-weight: 700; color: var(--primary-dk); margin-bottom: 4px; }
+    .notes { margin-top: 20px; font-size: 15px; color: var(--text-sub); padding-left: 1.2em; }
+    .notes li { margin-bottom: 4px; }
+
+    /* ============================================================
+       푸터
+    ============================================================ */
+    footer {
+      background: #37474F;
+      color: rgba(255,255,255,.8);
+      text-align: center;
+      padding: 28px 16px;
+      font-size: 14px;
+    }
+    footer nav { justify-content: center; gap: 8px; margin-bottom: 10px; }
+    footer nav a { color: rgba(255,255,255,.8); font-size: 14px; padding: 4px 8px; }
+    footer nav a:hover { color: #fff; }
+
+    /* ============================================================
+       반응형
+    ============================================================ */
+    @media (max-width: 600px) {
+      html { scroll-padding-top: 0; }
+      header { position: static; }
+      .header-inner { padding: 10px 0; flex-direction: column; align-items: flex-start; }
+      nav { justify-content: flex-start; }
+      .section { padding: 22px 16px 26px; }
+      .shots { gap: 16px; }
+      .shot { width: calc(50% - 8px); }
+      .shot.single { width: 72%; }
+      .card-grid { grid-template-columns: 1fr; }
+    }
+    /* ---- 言語切り替え・翻訳の注記（多言語対応） ---- */
+    .lang-bar { border-bottom: 1px solid rgba(255,255,255,.18); }
+    .lang-inner {
+      max-width: 960px; margin: 0 auto; padding: 5px 0;
+      display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 2px;
+      font-size: 13px; line-height: 1.4;
+    }
+    .lang-inner .globe { margin-right: 4px; }
+    .lang-inner a { color: rgba(255,255,255,.88); text-decoration: none; padding: 3px 9px; border-radius: 999px; }
+    .lang-inner a:hover { background: rgba(255,255,255,.2); color: #fff; }
+    .lang-inner a[aria-current="page"] { background: #fff; color: #3949AB; font-weight: 700; }
+    .shot-note { font-size: 15px; color: #555; background: #fff; border-left: 5px solid #5C6BC0; border-radius: 0 8px 8px 0; padding: 10px 14px; margin: -16px 0 32px; }
+    .translation-note { background: #FFF8E1; border: 1px solid #FFE082; border-radius: 10px; padding: 12px 16px; margin-bottom: 20px; font-size: 15px; }
+    html[lang="ko"] body { font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif; }
+    html[lang="en"] body, html[lang="es"] body, html[lang="fr"] body, html[lang="de"] body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    @media (max-width: 600px) { .lang-inner { justify-content: flex-start; } }
+  </style>
+  <link rel="alternate" hreflang="ja" href="https://civicai-official.github.io/locknote-site/guide.html" />
+  <link rel="alternate" hreflang="en" href="https://civicai-official.github.io/locknote-site/en/guide.html" />
+  <link rel="alternate" hreflang="ko" href="https://civicai-official.github.io/locknote-site/ko/guide.html" />
+  <link rel="alternate" hreflang="es" href="https://civicai-official.github.io/locknote-site/es/guide.html" />
+  <link rel="alternate" hreflang="fr" href="https://civicai-official.github.io/locknote-site/fr/guide.html" />
+  <link rel="alternate" hreflang="de" href="https://civicai-official.github.io/locknote-site/de/guide.html" />
+  <link rel="alternate" hreflang="x-default" href="https://civicai-official.github.io/locknote-site/guide.html" />
+</head>
+<body>
+
+<!-- ============================================================
+     헤더
+============================================================ -->
+<header>
+  <div class="lang-bar">
+    <div class="lang-inner"><span class="globe" aria-hidden="true">🌐</span><a href="../guide.html" hreflang="ja" lang="ja">日本語</a> <a href="../en/guide.html" hreflang="en" lang="en">English</a> <a href="../ko/guide.html" hreflang="ko" lang="ko" aria-current="page">한국어</a> <a href="../es/guide.html" hreflang="es" lang="es">Español</a> <a href="../fr/guide.html" hreflang="fr" lang="fr">Français</a> <a href="../de/guide.html" hreflang="de" lang="de">Deutsch</a></div>
+  </div>
+  <div class="header-inner">
+    <div class="site-title">
+      <span class="icon">🔐</span>
+      LockNote
+    </div>
+    <nav>
+      <a href="index.html">홈</a>
+      <a href="guide.html" class="active">사용 방법</a>
+      <a href="terms.html">이용약관</a>
+      <a href="privacy.html">개인정보 처리방침</a>
+      <a href="legal.html">특정상거래법 표기</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>📖 사용 방법 안내</h1>
+  <p>처음 설정부터 비밀번호·할 일·메모 사용 방법까지, 실제 화면을 보면서 설명합니다.</p>
+</div>
+
+<main>
+
+  <!-- 목차 -->
+  <div class="toc">
+    <h2>목차</h2>
+    <ol>
+      <li><a href="#sec-setup">처음 설정하기</a></li>
+      <li><a href="#sec-screens">화면 보는 법</a></li>
+      <li><a href="#sec-unlock">앱 열기(잠금 해제)</a></li>
+      <li><a href="#sec-add">비밀번호 등록하기</a></li>
+      <li><a href="#sec-view">비밀번호 보기·복사하기</a></li>
+      <li><a href="#sec-search">찾기(검색)</a></li>
+      <li><a href="#sec-generator">안전한 비밀번호 만들기</a></li>
+      <li><a href="#sec-edit">고치기·지우기</a></li>
+      <li><a href="#sec-todo">할 일(To Do)</a></li>
+      <li><a href="#sec-memo">메모</a></li>
+      <li><a href="#sec-security">안전을 지키는 장치</a></li>
+      <li><a href="#sec-settings">설정</a></li>
+      <li><a href="#sec-csv">CSV로 저장·복원</a></li>
+      <li><a href="#sec-premium">프리미엄 플랜</a></li>
+    </ol>
+  </div>
+
+  <div class="howto">
+    <span class="legend" aria-hidden="true"></span>
+    <p>화면 속 <strong style="color:var(--tap)">빨간 동그라미</strong>는 손가락으로 가볍게 누르는(탭하는) 곳입니다.</p>
+  </div>
+  <p class="shot-note">이 페이지의 화면 사진은 일본어판 앱입니다. 한국어판에서도 화면 배치와 버튼 위치는 같습니다.</p>
+
+  <!-- ============================================================
+       1. 처음 설정하기
+  ============================================================ -->
+  <section class="section" id="sec-setup">
+    <div class="section-header">
+      <div class="num">1</div>
+      <h2>처음 설정하기</h2>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>사용할 언어 선택하기</strong>
+          <p>앱을 처음 열면 언어를 선택하는 화면이 나옵니다. ‘한국어’를 선택하고 아래의 ‘Start with this language’를 탭합니다. 언어는 나중에 설정 화면에서 바꿀 수 있습니다.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>이용약관과 개인정보 처리방침에 동의하기</strong>
+          <p>파란 글자를 탭하면 내용을 읽을 수 있습니다. 다 읽은 후 오른쪽의 네모 2개에 체크하고 ‘동의하고 시작하기’를 탭합니다.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>6자리 PIN 코드(숫자 비밀번호) 정하기</strong>
+          <p>앱을 열 때 사용할 숫자 6개를 입력하고 ‘다음’을 탭합니다. 확인을 위해 같은 숫자를 한 번 더 입력하고 ‘설정하기’를 탭합니다. 눈 모양 표시를 탭하면 입력한 숫자를 확인할 수 있습니다.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>준비가 끝났습니다</strong>
+          <p>비밀번호 목록 화면이 나옵니다. 처음에는 아무것도 등록되어 있지 않습니다.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="shots">
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/01-language.webp" width="540" height="1200" loading="lazy" alt="언어를 선택하는 화면. 언어를 선택하고 아래 버튼을 누릅니다">
+          <span class="tap wide" style="left:50%;top:91.3%"></span>
+        </div></div>
+        <figcaption><b>① 언어 선택</b>아래 버튼을 탭</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/02-terms.webp" width="540" height="1200" loading="lazy" alt="이용약관과 개인정보 처리방침 동의 화면. 체크 상자 2개에 체크합니다">
+          <span class="tap sm" style="left:83%;top:74.7%"></span>
+          <span class="tap sm" style="left:83%;top:82.1%"></span>
+          <span class="tap wide" style="left:50%;top:92.3%"></span>
+        </div></div>
+        <figcaption><b>② 동의하기</b>2곳에 체크하고 아래 버튼</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/03-pin-setup.webp" width="540" height="1200" loading="lazy" alt="PIN 코드를 정하는 화면. 숫자 버튼으로 6자리를 입력합니다">
+        </div></div>
+        <figcaption><b>③ PIN 코드 정하기</b>숫자 6개를 입력(2번)</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/04-home-empty.webp" width="540" height="1200" loading="lazy" alt="설정을 마친 후의 비밀번호 목록 화면. 아직 아무것도 등록되어 있지 않습니다">
+        </div></div>
+        <figcaption><b>④ 준비 완료</b>비밀번호 목록 화면</figcaption>
+      </figure>
+    </div>
+
+    <div class="warn-box">
+      <strong>⚠️ PIN 코드를 잊지 마십시오</strong><br>
+      PIN 코드를 잊어버리면 앱 안의 데이터를 볼 수 없게 됩니다. 종이에 적어 가족과 공유하는 등 잊지 않도록 해 두십시오.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       2. 화면 보는 법
+  ============================================================ -->
+  <section class="section" id="sec-screens">
+    <div class="section-header">
+      <div class="num">2</div>
+      <h2>화면 보는 법</h2>
+    </div>
+
+    <p class="lead">화면 맨 아래에 버튼 3개가 있습니다. 탭하면 화면이 바뀝니다.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">🔒</div>
+        <h3>비밀번호</h3>
+        <p>서비스별 ID(사용자명)와 비밀번호를 보관합니다.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">☑️</div>
+        <h3>할 일</h3>
+        <p>해야 할 일을 적어 두는 곳입니다. 기한 날짜와 시간에 알림으로 알려 줄 수 있습니다.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📝</div>
+        <h3>메모</h3>
+        <p>자유롭게 쓸 수 있는 메모장입니다. 레이블로 분류할 수 있습니다.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:18px;">화면 오른쪽 위의 <strong>⚙️ 톱니바퀴</strong>는 설정, <strong>🔒 자물쇠</strong>는 바로 잠그는 버튼입니다.</p>
+
+    <div class="point-box">
+      <strong>👀 ‘보기 전용’일 때</strong><br>
+      <a href="#sec-premium">프리미엄 플랜</a>의 무료 체험을 시작하기 전이나 해지한 후에는 ‘보기 전용’이 되어, 데이터를 보거나 복사할 수는 있지만 추가나 편집은 할 수 없습니다. 이 앱에는 광고가 표시되지 않습니다.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       3. 잠금 해제
+  ============================================================ -->
+  <section class="section" id="sec-unlock">
+    <div class="section-header">
+      <div class="num">3</div>
+      <h2>앱 열기(잠금 해제)</h2>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>PIN 코드 입력하기</strong>
+          <p>앱을 열면 ‘잠금 해제’ 화면이 나옵니다. 정해 둔 6자리 숫자를 입력하면 자동으로 열립니다.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>지문이나 얼굴로도 열 수 있습니다</strong>
+          <p>스마트폰에 지문이나 얼굴이 등록되어 있으면, 왼쪽 아래의 지문 표시를 눌러 PIN 코드 없이 열 수 있습니다.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="shots">
+      <figure class="shot single">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/05-lock.webp" width="540" height="1200" loading="lazy" alt="잠금 해제 화면. 숫자 버튼으로 PIN 코드를 입력합니다. 왼쪽 아래에 지문 표시">
+          <span class="tap sm" style="left:18.9%;top:62.1%"></span>
+        </div></div>
+        <figcaption><b>잠금 해제 화면</b>왼쪽 아래는 지문·얼굴로 여는 버튼</figcaption>
+      </figure>
+    </div>
+
+    <div class="point-box">
+      <strong>⏱️ 자동으로 잠깁니다</strong><br>
+      다른 앱으로 전환하고 60초가 지나면 자동으로 잠깁니다.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       4. 비밀번호 등록
+  ============================================================ -->
+  <section class="section" id="sec-add">
+    <div class="section-header">
+      <div class="num">4</div>
+      <h2>비밀번호 등록하기</h2>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>오른쪽 아래의 ‘+ 새로 등록’을 탭</strong>
+          <p>등록 화면이 열립니다.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>‘URL명’에 어떤 서비스인지 알 수 있는 이름 넣기</strong>
+          <p>예: ‘Google’, ‘Amazon’, ‘○○은행’ 등.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>‘ID / 사용자명’ 넣기</strong>
+          <p>로그인에 사용하는 ID나 이메일 주소, 전화번호 등입니다.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>‘비밀번호’ 넣기</strong>
+          <p>눈 모양 표시로 입력한 글자를 보이게 하거나 숨길 수 있습니다. 아직 정하지 않았다면 옆의 둥근 화살표 표시로 <a href="#sec-generator">자동으로 만들 수 있습니다</a>.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>‘메모 (선택)’는 써도 되고 안 써도 됩니다</strong>
+          <p>비밀 질문의 답이나 로그인할 때 주의할 점 등을 적어 둘 수 있습니다.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>‘저장하기’를 탭</strong>
+          <p>목록에 추가됩니다. 목록은 이름 순서로 정렬됩니다.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="shots">
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/04-home-empty.webp" width="540" height="1200" loading="lazy" alt="비밀번호 목록 화면. 오른쪽 아래의 새로 등록 버튼">
+          <span class="tap" style="left:79.7%;top:84.1%;width:34%;aspect-ratio:auto;height:7.5%;border-radius:999px"></span>
+        </div></div>
+        <figcaption><b>① 새로 등록</b>오른쪽 아래 버튼을 탭</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/07-add.webp" width="540" height="1200" loading="lazy" alt="비밀번호 등록 화면. URL명, ID, 비밀번호, 메모를 입력하고 저장합니다">
+          <span class="tap wide" style="left:50%;top:53.6%"></span>
+        </div></div>
+        <figcaption><b>② 입력하고 저장</b>4개 칸에 입력하고 ‘저장하기’</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/06-home-list.webp" width="540" height="1200" loading="lazy" alt="비밀번호가 등록된 목록 화면">
+        </div></div>
+        <figcaption><b>③ 목록에 추가</b>등록한 내용이 표시됩니다</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       5. 확인·복사
+  ============================================================ -->
+  <section class="section" id="sec-view">
+    <div class="section-header">
+      <div class="num">5</div>
+      <h2>비밀번호 보기·복사하기</h2>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>목록에서 보고 싶은 서비스를 탭</strong>
+          <p>자세한 화면이 열립니다.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>눈 모양 표시로 비밀번호 보기</strong>
+          <p>처음에는 ‘●●●’로 가려져 있습니다. 눈 모양 표시를 탭하면 글자가 보입니다.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>네모 두 개가 겹친 표시로 복사</strong>
+          <p>ID·비밀번호·메모 옆에 있는 표시를 탭하면 복사됩니다. 로그인 화면에서 ‘붙여넣기’를 하면 입력할 수 있습니다.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="shots">
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/08-detail.webp" width="540" height="1200" loading="lazy" alt="비밀번호의 자세한 화면. 비밀번호는 ●으로 가려져 있습니다. 눈 모양 표시와 복사 표시">
+          <span class="tap sm" style="left:76.4%;top:30.9%"></span>
+          <span class="tap sm" style="left:88.4%;top:30.9%"></span>
+        </div></div>
+        <figcaption><b>자세한 화면</b>왼쪽이 눈 모양, 오른쪽이 복사</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/09-detail-show.webp" width="540" height="1200" loading="lazy" alt="눈 모양 표시를 탭하여 비밀번호가 표시된 화면">
+        </div></div>
+        <figcaption><b>비밀번호 표시</b>한 번 더 탭하면 가려집니다</figcaption>
+      </figure>
+    </div>
+
+    <div class="point-box">
+      <strong>🔒 복사한 내용은 30초 후에 지워집니다</strong><br>
+      다른 사람이 보지 못하도록, 복사한 비밀번호는 30초 후에 자동으로 지워집니다. 시간 안에 붙여넣지 못했다면 한 번 더 복사하십시오.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       6. 검색
+  ============================================================ -->
+  <section class="section" id="sec-search">
+    <div class="section-header">
+      <div class="num">6</div>
+      <h2>찾기(검색)</h2>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>목록 위의 ‘URL명, ID, 메모로 검색’을 탭</strong>
+          <p>글자를 입력할 수 있게 됩니다.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>찾고 싶은 말 넣기</strong>
+          <p>입력한 말이 들어 있는 것만 바로 표시됩니다.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="point-box">
+      <strong>💡 찾을 수 있는 내용</strong><br>
+      URL명(서비스 이름)·ID·메모 3가지에서 찾습니다. 비밀번호 자체로는 찾을 수 없습니다.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       7. 비밀번호 생성
+  ============================================================ -->
+  <section class="section" id="sec-generator">
+    <div class="section-header">
+      <div class="num">7</div>
+      <h2>안전한 비밀번호 만들기</h2>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>등록이나 편집 화면에서 비밀번호 칸 오른쪽에 있는 둥근 화살표 표시를 탭</strong>
+          <p>한 번 탭하기만 하면 16자의 안전한 비밀번호가 자동으로 입력됩니다.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>그대로 ‘저장하기’를 탭</strong>
+          <p>다시 만들고 싶을 때는 표시를 한 번 더 탭합니다.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="shots">
+      <figure class="shot single">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/10-generate.webp" width="540" height="1200" loading="lazy" alt="비밀번호 칸 오른쪽에 있는 둥근 화살표 표시를 탭하면 새 비밀번호가 입력됩니다">
+          <span class="tap sm" style="left:88.4%;top:31.9%"></span>
+        </div></div>
+        <figcaption><b>비밀번호 자동으로 만들기</b>둥근 화살표 표시를 탭</figcaption>
+      </figure>
+    </div>
+
+    <div class="point-box">
+      <strong>🎲 만들어지는 비밀번호</strong><br>
+      영어 대문자·소문자·숫자·기호를 섞은 16자입니다. 다른 사람이 알아맞히기 어려워 안전합니다.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       8. 편집·삭제
+  ============================================================ -->
+  <section class="section" id="sec-edit">
+    <div class="section-header">
+      <div class="num">8</div>
+      <h2>고치기·지우기</h2>
+    </div>
+
+    <h3>✏️ 고치기</h3>
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>자세한 화면에서 오른쪽 위의 연필 표시를 탭</strong>
+          <p>‘편집’ 화면이 열립니다.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>고치고 싶은 곳을 바꿔 쓰고 ‘저장하기’를 탭</strong>
+        </div>
+      </li>
+    </ol>
+
+    <h3>🗑️ 지우기</h3>
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>자세한 화면에서 오른쪽 위의 휴지통 표시를 탭</strong>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>확인 화면에서 ‘삭제하기’를 탭</strong>
+          <p>그만둘 때는 ‘취소’를 탭합니다.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="shots">
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/08-detail.webp" width="540" height="1200" loading="lazy" alt="자세한 화면 오른쪽 위에 연필 표시와 휴지통 표시">
+          <span class="tap sm" style="left:82.5%;top:5.5%"></span>
+          <span class="tap sm" style="left:94%;top:5.5%;width:11%"></span>
+        </div></div>
+        <figcaption><b>오른쪽 위의 표시</b>왼쪽이 ‘고치기’, 오른쪽이 ‘지우기’</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/11-delete.webp" width="540" height="1200" loading="lazy" alt="삭제 확인 화면. 취소 버튼과 삭제하기 버튼">
+          <span class="tap" style="left:74.5%;top:56.5%;width:22%;aspect-ratio:auto;height:6%;border-radius:999px"></span>
+        </div></div>
+        <figcaption><b>삭제 확인</b>‘삭제하기’를 누르면 지워집니다</figcaption>
+      </figure>
+    </div>
+
+    <div class="warn-box">
+      <strong>⚠️ 지운 것은 되돌릴 수 없습니다</strong><br>
+      삭제하기 전에 정말 지워도 되는지 확인하십시오.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       9. 할 일
+  ============================================================ -->
+  <section class="section" id="sec-todo">
+    <div class="section-header">
+      <div class="num">9</div>
+      <h2>할 일(To Do)</h2>
+    </div>
+
+    <p class="lead">병원 예약이나 서류 제출 등 해야 할 일을 적어 둘 수 있습니다. 기한 날짜와 시간에 스마트폰으로 알림을 보낼 수도 있습니다.</p>
+
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>아래의 ‘할 일’을 탭하고, 오른쪽 아래의 ‘+ 새 할 일’을 탭</strong>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>‘제목’에 할 일 쓰기</strong>
+          <p>‘설명’에는 준비물 등을 적어 둘 수 있습니다(쓰지 않아도 됩니다).</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>‘마감일’과 ‘시간’ 선택하기(선택 사항)</strong>
+          <p>시간까지 정하면 ‘알림’을 켤 수 있습니다.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>알림을 받고 싶을 때는 ‘알림’ 스위치 켜기</strong>
+          <p>처음 켤 때 스마트폰이 ‘알림을 허용하시겠습니까?’라고 묻습니다. ‘허용’을 선택하십시오.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>‘저장하기’를 탭</strong>
+          <p>목록은 ‘기한 초과’, ‘오늘’, ‘예정’, ‘완료’로 나뉘어 표시됩니다.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>다 끝나면 왼쪽 네모를 탭하여 체크</strong>
+          <p>‘완료’로 옮겨집니다. 한 번 더 탭하면 원래대로 돌아갑니다.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="shots">
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/12-todo-list.webp" width="540" height="1200" loading="lazy" alt="할 일 목록 화면. 예정과 완료로 나뉘어 있습니다">
+          <span class="tap sm" style="left:12.3%;top:18.3%"></span>
+          <span class="tap" style="left:78.8%;top:84.1%;width:34%;aspect-ratio:auto;height:7.5%;border-radius:999px"></span>
+        </div></div>
+        <figcaption><b>할 일 목록</b>왼쪽 네모로 ‘완료’, 오른쪽 아래로 추가</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/13-todo-edit.webp" width="540" height="1200" loading="lazy" alt="할 일 입력 화면. 제목, 설명, 마감일, 시간, 알림 스위치">
+          <span class="tap sm" style="left:86.3%;top:55%"></span>
+        </div></div>
+        <figcaption><b>할 일 입력</b>‘알림’을 켜면 알려 줍니다</figcaption>
+      </figure>
+    </div>
+
+    <div class="point-box">
+      <strong>🔔 알림 표시</strong><br>
+      알림을 켠 할 일에는 목록 오른쪽에 종 모양 표시가 붙습니다. 스마트폰의 절전 설정에 따라 알림이 몇 분 늦어질 수 있습니다.
+    </div>
+    <p style="font-size:16px;color:var(--text-sub);">할 일을 고칠 때는 목록에서 탭합니다. 지울 때는 열린 화면 오른쪽 위의 휴지통 표시를 탭합니다.</p>
+  </section>
+
+  <!-- ============================================================
+       10. 메모
+  ============================================================ -->
+  <section class="section" id="sec-memo">
+    <div class="section-header">
+      <div class="num">10</div>
+      <h2>메모</h2>
+    </div>
+
+    <h3>📝 메모 쓰기</h3>
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>아래의 ‘메모’를 탭하고, 오른쪽 아래의 ‘+ 새 메모’를 탭</strong>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>제목과 본문 쓰기</strong>
+          <p>레이블이 있을 때는 제목 아래의 레이블을 탭하여 붙일 수 있습니다(몇 개든 붙일 수 있습니다).</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>오른쪽 위의 ✓ 표시를 탭하여 저장</strong>
+        </div>
+      </li>
+    </ol>
+
+    <h3>🏷️ 레이블로 나누기</h3>
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>메모 화면 오른쪽 위의 꼬리표 표시를 탭</strong>
+          <p>‘레이블 관리’ 화면이 열립니다.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>오른쪽 아래의 ‘+’로 레이블 만들기</strong>
+          <p>예: ‘가족’, ‘건강’, ‘취미’. 연필로 이름을 바꾸고, 휴지통으로 삭제할 수 있습니다. 레이블을 지워도 메모는 지워지지 않습니다.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>목록 위의 레이블을 탭하면 그 레이블의 메모만 표시</strong>
+          <p>위쪽 검색 칸에서는 제목과 본문으로 찾을 수 있습니다.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="shots">
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/14-memo-list.webp" width="540" height="1200" loading="lazy" alt="메모 목록 화면. 위쪽에 검색 칸과 레이블 버튼, 오른쪽 위에 꼬리표 표시">
+          <span class="tap sm" style="left:70.8%;top:5.5%"></span>
+          <span class="tap" style="left:57%;top:19.1%;width:48%;aspect-ratio:auto;height:5%;border-radius:999px"></span>
+        </div></div>
+        <figcaption><b>메모 목록</b>위쪽 레이블로 골라 보기</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/15-memo-edit.webp" width="540" height="1200" loading="lazy" alt="메모를 쓰는 화면. 제목 아래에 레이블, 오른쪽 위에 저장 표시">
+          <span class="tap sm" style="left:50%;top:19.1%"></span>
+          <span class="tap sm" style="left:94%;top:5.5%;width:11%"></span>
+        </div></div>
+        <figcaption><b>메모 쓰기</b>레이블을 탭하여 붙이고, ✓로 저장</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/16-labels.webp" width="540" height="1200" loading="lazy" alt="레이블 관리 화면. 레이블 목록과 오른쪽 아래의 추가 버튼">
+          <span class="tap sm" style="left:89%;top:92.8%"></span>
+        </div></div>
+        <figcaption><b>레이블 관리</b>오른쪽 아래의 ‘+’로 만들기</figcaption>
+      </figure>
+    </div>
+
+    <div class="point-box">
+      <strong>🔐 메모와 할 일도 암호화하여 저장됩니다</strong><br>
+      작성한 내용은 비밀번호와 마찬가지로 스마트폰의 안전한 보관 장소에 암호화하여 저장됩니다. 다만 비밀번호는 ‘비밀번호’ 화면에 등록하면 복사나 자동 생성 등 편리한 기능을 사용할 수 있으므로 권장합니다.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       11. 보안
+  ============================================================ -->
+  <section class="section" id="sec-security">
+    <div class="section-header">
+      <div class="num">11</div>
+      <h2>안전을 지키는 장치</h2>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">🔢</div>
+        <h3>PIN 코드로 잠금</h3>
+        <p>6자리 PIN 코드를 모르는 사람은 앱을 열 수 없습니다.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">👆</div>
+        <h3>지문·얼굴로 잠금 해제</h3>
+        <p>스마트폰에 지문이나 얼굴을 등록해 두었다면 그것으로도 열 수 있습니다.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⏱️</div>
+        <h3>자동 잠금</h3>
+        <p>다른 앱으로 전환하고 60초가 지나면 자동으로 잠깁니다.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🚫</div>
+        <h3>잘못된 입력 제한</h3>
+        <p>PIN 코드를 5번 틀리면 1분 동안 입력할 수 없게 됩니다. 계속 틀리면 10분, 15분… 하고 기다리는 시간이 길어집니다.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔐</div>
+        <h3>데이터는 암호화하여 저장</h3>
+        <p>비밀번호·할 일·메모는 스마트폰의 안전한 보관 장소에 암호화하여 저장합니다.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📋</div>
+        <h3>복사한 내용은 30초 후 삭제</h3>
+        <p>복사한 비밀번호는 30초 후에 자동으로 지워집니다.</p>
+      </div>
+    </div>
+
+    <div class="point-box" style="margin-top: 20px;">
+      <strong>🛡️ 데이터는 내 스마트폰 안에만 있습니다</strong><br>
+      등록한 비밀번호·할 일·메모를 저희 서버나 클라우드로 보내는 일은 없습니다. 광고도 표시하지 않으므로 광고 회사와 통신하는 일도 없습니다(자세한 내용은 <a href="privacy.html">개인정보 처리방침</a>을 참고하십시오).
+    </div>
+    <div class="warn-box">
+      <strong>⚠️ 기기를 바꾸기 전에</strong><br>
+      데이터는 스마트폰 안에만 있기 때문에, 스마트폰을 잃어버리거나 기기를 바꾸면 데이터도 함께 없어집니다. <a href="#sec-csv">CSV로 저장</a>을 사용하여 사본을 만들어 두면 안심입니다.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       12. 설정
+  ============================================================ -->
+  <section class="section" id="sec-settings">
+    <div class="section-header">
+      <div class="num">12</div>
+      <h2>설정</h2>
+    </div>
+
+    <p class="lead">화면 오른쪽 위의 톱니바퀴 표시를 눌러 설정 화면을 엽니다.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>항목</th><th>할 수 있는 일</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>⭐ 프리미엄 플랜</td><td>프리미엄 플랜 신청(처음 1개월은 무료)·확인</td></tr>
+          <tr><td>⇅ CSV 관리</td><td>비밀번호를 파일로 저장·파일에서 복원(복원은 프리미엄 플랜)</td></tr>
+          <tr><td>🔢 PIN 코드 변경</td><td>현재 PIN 코드를 입력한 다음, 새 PIN 코드를 2번 입력합니다</td></tr>
+          <tr><td>🎨 테마 설정</td><td>화면 밝기를 ‘라이트 모드’, ‘다크 모드’, ‘시스템 설정 따르기’ 중에서 선택합니다</td></tr>
+          <tr><td>🌐 언어</td><td>일본어·English·한국어·Español·Français·Deutsch 중에서 바꿉니다</td></tr>
+          <tr><td>📄 이용약관 외</td><td>이용약관·개인정보 처리방침·특정상거래법에 관한 표기를 엽니다</td></tr>
+          <tr><td>❓ 사용법</td><td>이 페이지를 엽니다</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="shots">
+      <figure class="shot">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/17-settings.webp" width="540" height="923" loading="lazy" alt="설정 화면. 프리미엄 플랜, CSV 관리, PIN 코드 변경, 테마 설정, 언어, 이용약관 등의 항목">
+        </div></div>
+        <figcaption><b>설정 화면</b></figcaption>
+      </figure>
+      <figure class="shot dialog">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/19-language-setting.webp" width="540" height="818" loading="lazy" alt="언어를 선택하는 화면. 일본어, English, 한국어, Español, Français, Deutsch">
+        </div></div>
+        <figcaption><b>언어 바꾸기</b>선택하고 오른쪽 아래 버튼</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       13. CSV
+  ============================================================ -->
+  <section class="section" id="sec-csv">
+    <div class="section-header">
+      <div class="num">13</div>
+      <h2>CSV로 저장·복원 <span class="badge-premium">⭐ 가져오기는 프리미엄</span></h2>
+    </div>
+
+    <p class="lead">등록한 비밀번호를 파일(CSV 형식)로 내보내 사본을 만들어 둘 수 있습니다. 기기를 바꿀 때는 새 스마트폰에서 그 파일을 불러오면 원래대로 되돌릴 수 있습니다.</p>
+
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>설정 화면에서 ‘CSV 관리’를 탭</strong>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>사본을 만들 때는 ‘내보내기’를 탭</strong>
+          <p>화면 안내에 따라 저장할 곳을 선택합니다.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>원래대로 되돌릴 때는 ‘가져오기’를 탭</strong>
+          <p>내보낸 파일을 선택하고, 불러오는 방법(추가/덮어쓰기/전체 교체)을 선택합니다. 가져오기에는 <a href="#sec-premium">프리미엄 플랜</a>이 필요합니다(내보내기는 언제든지 할 수 있습니다).</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="shots">
+      <figure class="shot single">
+        <div class="frame"><div class="screen">
+          <img src="../images/guide/18-csv.webp" width="540" height="1200" loading="lazy" alt="CSV 관리 화면. 내보내기 버튼과 가져오기 버튼">
+          <span class="tap wide" style="left:50%;top:27.6%;width:62%"></span>
+          <span class="tap wide" style="left:50%;top:49.3%;width:62%"></span>
+        </div></div>
+        <figcaption><b>CSV 관리</b>위쪽이 내보내기, 아래쪽이 가져오기</figcaption>
+      </figure>
+    </div>
+
+    <div class="warn-box">
+      <strong>⚠️ 내보낸 파일은 조심해서 다루십시오</strong><br>
+      파일에는 비밀번호가 그대로 적혀 있습니다. 다른 사람에게 보내거나 누구나 볼 수 있는 곳에 두지 마십시오. 다 사용한 후에는 삭제하십시오.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       14. 프리미엄 플랜
+  ============================================================ -->
+  <section class="section" id="sec-premium">
+    <div class="section-header">
+      <div class="num">14</div>
+      <h2>프리미엄 플랜 <span class="badge-premium">⭐ PREMIUM</span></h2>
+    </div>
+
+    <div class="price-box">
+      <div class="big">🎁 처음 1개월은 무료</div>
+      <div>이후 <strong>월 100엔</strong>(세금 포함·자동 갱신)</div>
+      <div style="font-size: 15px; color: var(--text-sub); margin-top: 6px;">언제든지 해지할 수 있습니다. 무료 기간 중에 해지하면 요금이 청구되지 않습니다. 해지해도 기간이 끝날 때까지는 그대로 사용할 수 있습니다.</div>
+    </div>
+
+    <h3>프리미엄 플랜으로 할 수 있는 일</h3>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">✏️</div>
+        <h3>등록·편집</h3>
+        <p>비밀번호·할 일·메모를 등록하고, 고치고, 삭제할 수 있습니다.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔐</div>
+        <h3>백업에서 복원</h3>
+        <p>암호화 백업 파일에서 데이터를 원래대로 되돌릴 수 있습니다.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📥</div>
+        <h3>CSV 가져오기</h3>
+        <p>내보낸 파일에서 비밀번호를 원래대로 되돌릴 수 있습니다.</p>
+      </div>
+    </div>
+
+    <div class="point-box" style="margin-top: 20px;">
+      <strong>👀 플랜이 없을 때는 ‘보기 전용’</strong><br>
+      무료 체험을 시작하기 전이나, 해지 후 기간이 끝난 뒤에는 ‘보기 전용’이 됩니다. 저장한 데이터를 보기·복사하기, 암호화 백업 만들기, CSV로 내보내기는 할 수 있습니다. 플랜이 끝나도 데이터가 사라지는 일은 없습니다.
+    </div>
+
+    <h3>신청 방법</h3>
+    <ol class="steps">
+      <li><div><strong>설정 화면에서 ‘프리미엄 플랜’을 탭</strong></div></li>
+      <li><div><strong>‘1개월 무료로 시작하기’를 탭</strong><p>Google Play 화면이 나오면 내용을 확인하고 절차를 진행합니다.</p></div></li>
+    </ol>
+
+    <ul class="notes">
+      <li>결제 금액은 Google Play 계정으로 청구됩니다.</li>
+      <li>무료 체험은 처음 신청하시는 분이 대상입니다.</li>
+      <li>무료 기간 종료일 또는 갱신일의 24시간 전까지 해지하지 않으면 월 100엔(세금 포함)이 자동으로 청구됩니다.</li>
+      <li>해지는 Google Play 앱의 ‘결제 및 정기 결제’ → ‘정기 결제’에서 할 수 있습니다. 앱을 삭제하는 것만으로는 해지되지 않습니다.</li>
+      <li>기기를 바꿨을 때는 프리미엄 플랜 화면의 ‘이전 구매 복원하기’를 탭하십시오.</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <nav>
+    <a href="index.html">홈</a>
+    <a href="guide.html">사용 방법</a>
+    <a href="terms.html">이용약관</a>
+    <a href="privacy.html">개인정보 처리방침</a>
+    <a href="legal.html">특정상거래법 표기</a>
+  </nav>
+  <p>&copy; 2026 LockNote (CivicAI)</p>
+</footer>
+
+</body>
+</html>
